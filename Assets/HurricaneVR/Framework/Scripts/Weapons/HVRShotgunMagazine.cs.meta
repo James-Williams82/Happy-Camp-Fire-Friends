@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ece64f546b4b471f9761a7aca682299f
+timeCreated: 1606175343
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.2
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Weapons/HVRShotgunMagazine.cs
+  uploadId: 671868

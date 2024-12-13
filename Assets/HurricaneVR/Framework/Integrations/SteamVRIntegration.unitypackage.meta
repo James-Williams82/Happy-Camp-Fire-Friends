@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 669e8154ef4d9b64787f2974409f606c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.2
+  assetPath: Assets/HurricaneVR/Framework/Integrations/SteamVRIntegration.unitypackage
+  uploadId: 671868

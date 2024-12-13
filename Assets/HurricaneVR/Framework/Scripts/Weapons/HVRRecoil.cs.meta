@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 83b3fda07db74abe982337dd671606de
+timeCreated: 1605382407
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.2
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Weapons/HVRRecoil.cs
+  uploadId: 671868

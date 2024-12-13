@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: aa0661dcedd54c9694313b64aa872ca4
+timeCreated: 1596310897
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177300
+  packageName: Hurricane VR - Physics Interaction Toolkit
+  packageVersion: 2.9.2
+  assetPath: Assets/HurricaneVR/Framework/Scripts/Core/VREvents.cs
+  uploadId: 671868
