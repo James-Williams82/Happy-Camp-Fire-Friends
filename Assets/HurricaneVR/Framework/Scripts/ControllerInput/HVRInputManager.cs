@@ -1198,7 +1198,7 @@ namespace HurricaneVR.Framework.ControllerInput
 
 #if USING_XR_MANAGEMENT
             var subsystems = new List<XRInputSubsystem>();
-            SubsystemManager.GetInstances<XRInputSubsystem>(subsystems);
+            SubsystemManager.GetSubsystems<XRInputSubsystem>(subsystems);
             Debug.Log("Found " + subsystems.Count + " input subsystems.");
 
             for (int i = 0; i < subsystems.Count; i++)
