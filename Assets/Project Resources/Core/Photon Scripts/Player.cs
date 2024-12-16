@@ -6,7 +6,7 @@ public class Player : NetworkBehaviour
 
     private void Awake()
     {
-        _cc = GetComponent<NetworkCharacterController>();
+        //_cc = GetComponent<NetworkCharacterController>();
     }
 
     public override void FixedUpdateNetwork()
@@ -14,7 +14,7 @@ public class Player : NetworkBehaviour
         if (GetInput(out NetworkInputData data))
         {
             data.direction.Normalize();
-            _cc.Move(5 * data.direction * Runner.DeltaTime);
+           // _cc.Move(5 * data.direction * Runner.DeltaTime);
         }
     }
 }
