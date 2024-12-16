@@ -23,9 +23,9 @@ MonoBehaviour:
     type: 3}
   RightHand: {fileID: 5317784970213213621, guid: 08a9044b5c065044ab67f546bf6b04e9,
     type: 3}
-  InverseKinematics: 0
+  InverseKinematics: 1
   IKHandMirroring: 1
-  FullBody: {fileID: 0}
+  FullBody: {fileID: 959316463473644902, guid: efaee201e7f696a47ad7f2be0aafef8f, type: 3}
   HandPoseHandleOffset: {x: 0, y: 0.08, z: 0}
   OpenHandPose: {fileID: 0}
   PoserShowsOneFinger: 0
