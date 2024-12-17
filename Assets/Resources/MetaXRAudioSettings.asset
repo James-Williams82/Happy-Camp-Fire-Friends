@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3adfb6cabe631f40a72c285abbb95d8, type: 3}
-  m_Name: HVREditorPreferences
+  m_Script: {fileID: 11500000, guid: f3fe6e38ac2d4c22b04340d6eda2a47e, type: 3}
+  m_Name: MetaXRAudioSettings
   m_EditorClassIdentifier: 
-  _updatedDisplayedVersion: 2.9.2
+  voiceLimit: 64
