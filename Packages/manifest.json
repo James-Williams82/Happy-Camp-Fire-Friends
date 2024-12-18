@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.meta.movement": "file:C:/Users/Artemis III/Downloads/Unity-Movement-69.0.0/Unity-Movement-69.0.0",
     "com.meta.xr.sdk.all": "69.0.1",
     "com.meta.xr.sdk.core": "69.0.1",
     "com.unity.burst": "1.8.18",
