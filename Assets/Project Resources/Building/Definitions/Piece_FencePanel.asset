@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b647804ced7d428cdc19641c9373c, type: 3}
+  m_Name: Piece_FencePanel
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
+  Id: fence_panel
+  DisplayName: Fence Panel
+  Footprint: {x: 4, y: 3, z: 1}
+  Support: 1
+  Cost:
+  - Type: 0
+    Amount: 2
+  Removable: 1
+  RefundOnRemove: 1
+  MaxHealth: 100
+  Prefab: {fileID: 7249187389341691852, guid: 141977a85381ec44d90f7ec9722f310b, type: 3}

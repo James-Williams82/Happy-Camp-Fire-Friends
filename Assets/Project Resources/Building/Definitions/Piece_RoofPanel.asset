@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b647804ced7d428cdc19641c9373c, type: 3}
+  m_Name: Piece_RoofPanel
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
+  Id: roof_panel
+  DisplayName: Roof Panel
+  Footprint: {x: 2, y: 1, z: 2}
+  Support: 2
+  Cost:
+  - Type: 0
+    Amount: 4
+  Removable: 1
+  RefundOnRemove: 1
+  MaxHealth: 100
+  Prefab: {fileID: 8090799669979961962, guid: ffa8b0ca4cc564040a07e533a4ae61f9, type: 3}

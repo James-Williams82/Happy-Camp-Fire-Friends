@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14caccbb13b6614d80ef9ae015148f6, type: 3}
+  m_Name: PieceCatalog
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceCatalog
+  CellSize: 0.5
+  Pieces:
+  - {fileID: 11400000, guid: e4d5881fdaa737841a946f7a0d9e7274, type: 2}
+  - {fileID: 11400000, guid: 0933ccfa832686349885e6a26cb934d2, type: 2}
+  - {fileID: 11400000, guid: a2dd8498737621b4489c4d8661d480f1, type: 2}
+  - {fileID: 11400000, guid: 679be3f30f162bb4aaadc4cb8b5fdb1c, type: 2}
+  - {fileID: 11400000, guid: 8afd5b2f7098ce94ebee379a9978ded7, type: 2}
+  - {fileID: 11400000, guid: 8c3e4187b1377384a99976ca1e03fe90, type: 2}
+  - {fileID: 11400000, guid: c4a2ac994337a1c4eabf1afa303717b2, type: 2}
+  - {fileID: 11400000, guid: 0dde343b6215d914281a2bf1539d38d8, type: 2}

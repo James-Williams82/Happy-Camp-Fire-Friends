@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b647804ced7d428cdc19641c9373c, type: 3}
+  m_Name: Piece_Beam
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
+  Id: beam
+  DisplayName: Beam
+  Footprint: {x: 3, y: 1, z: 1}
+  Support: 3
+  Cost:
+  - Type: 0
+    Amount: 2
+  Removable: 1
+  RefundOnRemove: 1
+  MaxHealth: 100
+  Prefab: {fileID: 5519803268271508756, guid: c69e9dbaffe77ad4d895f2c8cc9be86e, type: 3}

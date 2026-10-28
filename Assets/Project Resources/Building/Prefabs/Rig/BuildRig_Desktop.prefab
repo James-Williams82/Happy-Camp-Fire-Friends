@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3065070505117997806
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 65946214380462943, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_Name
+      value: BuildRig_Desktop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199824896082912898, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: _aim
+      value: 
+      objectReference: {fileID: 1938729687788608895}
+    - target: {fileID: 2199824896082912898, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: _input
+      value: 
+      objectReference: {fileID: 6546651838380045976}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7179489819577448114, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 65946214380462943, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6546651838380045976}
+    - targetCorrespondingSourceObject: {fileID: 65946214380462943, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1938729687788608895}
+  m_SourcePrefab: {fileID: 100100000, guid: 03e9b9e0a28a0344aa2c17e051cd15c9, type: 3}
+--- !u!1 &3054312292699617713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 65946214380462943, guid: 03e9b9e0a28a0344aa2c17e051cd15c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3065070505117997806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6546651838380045976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054312292699617713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c783a3a3b9a71144ac43058123e5760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CampfireFriends.Construction.KeyboardMouseBuildInput
+--- !u!114 &1938729687788608895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054312292699617713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a059b3c16c189144b332352b03d49b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CampfireFriends.Construction.ScreenPointerAim
+  _camera: {fileID: 0}
