@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 namespace CampfireFriends.Construction
 {
     /// <summary>
-    /// Desktop test bindings from doc §13.3: 1–9 select, mouse wheel cycles, R rotates,
-    /// left click confirms, X toggles delete, Esc cancels.
+    /// Desktop test bindings: B enters or leaves build mode, 1–9 pick a piece, mouse wheel cycles it,
+    /// R rotates, left click confirms, Esc steps back.
     /// </summary>
     public class KeyboardMouseBuildInput : BuildInputSource
     {
@@ -22,9 +22,9 @@ namespace CampfireFriends.Construction
                     if (keyboard[Key.Digit1 + i].wasPressedThisFrame) frame.Slot = i;
                 }
 
+                frame.ToggleBuild = keyboard.bKey.wasPressedThisFrame;
                 frame.Rotate = keyboard.rKey.wasPressedThisFrame;
-                frame.ToggleDelete = keyboard.xKey.wasPressedThisFrame;
-                frame.Cancel = keyboard.escapeKey.wasPressedThisFrame;
+                frame.Back = keyboard.escapeKey.wasPressedThisFrame;
             }
 
             if (mouse != null)

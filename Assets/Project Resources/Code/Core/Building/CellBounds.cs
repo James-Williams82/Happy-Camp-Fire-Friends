@@ -23,6 +23,15 @@ namespace CampfireFriends.Building
             new CellBounds(min, rotation.RotateSize(footprint));
 
         public Vector3Int Max => Min + Size;
+
+        /// <summary>
+        /// The low cell for a box of <paramref name="size"/> centred on this one horizontally and
+        /// sharing its base, as near the centre as the lattice allows. Used to turn a piece in place.
+        /// </summary>
+        public Vector3Int MinForSizeAboutCentre(Vector3Int size) =>
+            new Vector3Int(Min.x + FloorHalf(Size.x - size.x), Min.y, Min.z + FloorHalf(Size.z - size.z));
+
+        private static int FloorHalf(int value) => value >= 0 ? value / 2 : -((1 - value) / 2);
         public int Volume => Size.x * Size.y * Size.z;
 
         public bool Contains(Vector3Int cell) =>

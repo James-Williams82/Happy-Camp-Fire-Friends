@@ -8,6 +8,7 @@ using CampfireFriends.Supplies;
 using Fusion;
 using Oculus.Interaction;
 using Oculus.Interaction.Input;
+using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -40,6 +41,14 @@ namespace CampfireFriends.Construction.Editor
 
         // The authored world-space piece menu (Interaction SDK UI set). Its buttons become palette slots.
         private const string MenuPrefabPath = "Assets/UI/PRefabs/build-menu.prefab";
+
+        // The menu beside a selected piece, generated from the same Interaction SDK UI set.
+        private const string ModifyMenuPrefabPath = "Assets/UI/PRefabs/piece-modify-menu.prefab";
+        private static readonly string[] ModifyActions = { "Rotate 90°", "Reposition", "Delete", "Close" };
+
+        // Interaction SDK UI set: Backplate/EmptyUIBackplateWithCanvas and Button/PrimaryButton_IconAndLabel_UnityUIButton.
+        private const string UiBackplateGuid = "6b196de96e7d16b4297c1980179ae439";
+        private const string UiButtonGuid = "708bb04189b8488418aa725e7f94bbe8";
 
         // Interaction SDK: Runtime/Prefabs/Ray/ControllerRayInteractor.prefab
         private const string ControllerRayInteractorGuid = "44cf50d1a2e68b64791a3e3143ccda19";
@@ -174,6 +183,7 @@ namespace CampfireFriends.Construction.Editor
             BuildRigVariant(rigBase, "BuildRig_Desktop", typeof(KeyboardMouseBuildInput), typeof(ScreenPointerAim));
             BuildRigVariant(rigBase, "BuildRig_Quest", typeof(RayInteractorBuildInput), typeof(RayInteractorAim));
             BuildPaletteMenuPrefab(catalog);
+            BuildModifyMenuPrefab();
 
             AssetDatabase.SaveAssets();
             return catalog;
@@ -215,7 +225,7 @@ namespace CampfireFriends.Construction.Editor
 
                 PrefabUtility.SaveAsPrefabAsset(root, MenuPrefabPath);
                 if (buttons.Length < catalog.Count)
-                    Debug.LogWarning($"[BuildKit] {MenuPrefabPath} has {buttons.Length} buttons for {catalog.Count} pieces; the rest are only reachable with B / Y.");
+                    Debug.LogWarning($"[BuildKit] {MenuPrefabPath} has {buttons.Length} buttons for {catalog.Count} pieces; the rest cannot be picked in VR.");
             }
             finally
             {
@@ -223,11 +233,129 @@ namespace CampfireFriends.Construction.Editor
             }
         }
 
-        /// <summary>Points every palette menu in the scene at the scene's build controller.</summary>
+        /// <summary>
+        /// Points every palette menu in the scene at the scene's build controller, makes its first
+        /// child the panel shown in build mode, and has it appear in front of the camera rig's eyes.
+        /// </summary>
         private static void WireMenus(Scene scene, BuildController controller)
         {
+            var eyes = FindEyes(scene);
+
             foreach (var menu in FindInScene<BuildPaletteMenu>(scene))
-                Assign(menu, ("_controller", controller));
+            {
+                var panel = menu.transform.childCount > 0 ? menu.transform.GetChild(0).gameObject : null;
+                Assign(menu, ("_controller", controller), ("_panel", panel), ("_viewer", eyes));
+            }
+        }
+
+        private static Transform FindEyes(Scene scene) => FindInScene<Transform>(scene).FirstOrDefault(t => t.name == "CenterEyeAnchor");
+
+        /// <summary>
+        /// The modify menu beside a selected piece. Generated once from the Interaction SDK UI set
+        /// (the same backplate and buttons as the build menu), so it can be restyled by hand
+        /// afterwards: later rebuilds only re-link its buttons, in hierarchy order
+        /// rotate, reposition, delete, close.
+        /// </summary>
+        private static void BuildModifyMenuPrefab()
+        {
+            if (!File.Exists(ModifyMenuPrefabPath)) CreateModifyMenuPrefab();
+
+            var root = PrefabUtility.LoadPrefabContents(ModifyMenuPrefabPath);
+            try
+            {
+                var menu = root.GetComponent<PieceModifyMenu>();
+                if (menu == null) menu = root.AddComponent<PieceModifyMenu>();
+
+                var buttons = root.GetComponentsInChildren<UnityEngine.UI.Button>(true);
+                if (buttons.Length < ModifyActions.Length)
+                    throw new InvalidOperationException($"{ModifyMenuPrefabPath} needs {ModifyActions.Length} buttons: {string.Join(", ", ModifyActions)}.");
+
+                Assign(menu,
+                    ("_rotate", buttons[0]),
+                    ("_reposition", buttons[1]),
+                    ("_delete", buttons[2]),
+                    ("_close", buttons[3]),
+                    ("_panel", root.transform.GetChild(0).gameObject));
+                PrefabUtility.SaveAsPrefabAsset(root, ModifyMenuPrefabPath);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+        }
+
+        private static void CreateModifyMenuPrefab()
+        {
+            var backplate = LoadByGuid<GameObject>(UiBackplateGuid);
+            var button = LoadByGuid<GameObject>(UiButtonGuid);
+
+            const float buttonWidth = 220f, buttonHeight = 48f, spacing = 8f, padding = 24f;
+            var size = new Vector2(buttonWidth + padding * 2f,
+                ModifyActions.Length * buttonHeight + (ModifyActions.Length - 1) * spacing + padding * 2f);
+
+            var root = new GameObject(Path.GetFileNameWithoutExtension(ModifyMenuPrefabPath));
+            try
+            {
+                var panel = (GameObject)PrefabUtility.InstantiatePrefab(backplate, root.transform);
+                panel.name = "Panel";
+
+                var canvas = (RectTransform)FindDeep(panel.transform, "CanvasRoot");
+                var plate = (RectTransform)FindDeep(panel.transform, "UIBackplate");
+                canvas.sizeDelta = size;
+                canvas.localScale = Vector3.one * 0.0016f;
+                plate.sizeDelta = size;
+
+                foreach (var action in ModifyActions)
+                {
+                    var instance = (GameObject)PrefabUtility.InstantiatePrefab(button, plate);
+                    instance.name = $"Button {action}";
+                    ((RectTransform)instance.transform).sizeDelta = new Vector2(buttonWidth, buttonHeight);
+
+                    var label = instance.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t => t.name == "Label");
+                    if (label != null) label.text = action;
+
+                    // The sample icon is a shopping cart; the labels say enough.
+                    var icon = FindDeep(instance.transform, "Icon");
+                    if (icon != null) icon.gameObject.SetActive(false);
+                }
+
+                PrefabUtility.SaveAsPrefabAsset(root, ModifyMenuPrefabPath);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        /// <summary>Adds the modify menu to the scene once and points it at the build controller and the player's eyes.</summary>
+        private static void WireModifyMenu(Scene scene, BuildController controller)
+        {
+            var menu = FindInScene<PieceModifyMenu>(scene).FirstOrDefault();
+            if (menu == null)
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(ModifyMenuPrefabPath);
+                if (prefab == null) return;
+                menu = ((GameObject)PrefabUtility.InstantiatePrefab(prefab, scene)).GetComponent<PieceModifyMenu>();
+            }
+
+            Assign(menu, ("_controller", controller), ("_viewer", FindEyes(scene)));
+        }
+
+        private static T LoadByGuid<T>(string guid) where T : Object
+        {
+            return AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid))
+                   ?? throw new InvalidOperationException($"Asset {guid} not found. Is com.meta.xr.sdk.interaction installed?");
+        }
+
+        private static Transform FindDeep(Transform root, string name)
+        {
+            if (root.name == name) return root;
+            foreach (Transform child in root)
+            {
+                var found = FindDeep(child, name);
+                if (found != null) return found;
+            }
+            return null;
         }
 
         /// <summary>Interaction SDK canvases take ray and poke input through a PointableCanvasModule.</summary>
@@ -262,7 +390,8 @@ namespace CampfireFriends.Construction.Editor
                 ["Rock"] = Lit("Sandbox_Rock", new Color(0.5f, 0.5f, 0.52f)),
                 ["GhostValid"] = Transparent("Ghost_Valid", new Color(0.3f, 1f, 0.45f, 0.4f)),
                 ["GhostInvalid"] = Transparent("Ghost_Invalid", new Color(1f, 0.25f, 0.2f, 0.4f)),
-                ["DeleteHighlight"] = Transparent("Highlight_Delete", new Color(1f, 0.45f, 0.1f, 0.65f)),
+                ["OutlineHover"] = Unlit("Outline_Hover", new Color(0.9f, 0.95f, 1f)),
+                ["OutlineSelected"] = Unlit("Outline_Selected", new Color(1f, 0.82f, 0.15f)),
                 ["LineValid"] = Unlit("Line_Valid", new Color(0.3f, 1f, 0.45f)),
                 ["LineInvalid"] = Unlit("Line_Invalid", new Color(1f, 0.25f, 0.2f)),
                 ["Pointer"] = Unlit("Line_Pointer", new Color(0.95f, 0.95f, 0.8f)),
@@ -438,11 +567,15 @@ namespace CampfireFriends.Construction.Editor
                 pointer.transform.SetParent(root.transform, false);
                 ConfigureLine(pointer.GetComponent<LineRenderer>(), materials["Pointer"], 0.01f);
 
+                var hover = Outline(root, "HoverOutline", materials["OutlineHover"], materials["OutlineHover"], 0.008f);
+                var selection = Outline(root, "SelectionOutline", materials["OutlineSelected"], materials["LineInvalid"], 0.014f);
+
                 var controller = root.AddComponent<BuildController>();
                 Assign(controller,
                     ("_preview", preview.GetComponent<BuildPreviewView>()),
                     ("_pointer", pointer.GetComponent<PointerView>()),
-                    ("_deleteHighlight", materials["DeleteHighlight"]));
+                    ("_hoverOutline", hover),
+                    ("_selectionOutline", selection));
 
                 return PrefabUtility.SaveAsPrefabAsset(root, $"{RigPrefabs}/BuildRig_Base.prefab");
             }
@@ -450,6 +583,17 @@ namespace CampfireFriends.Construction.Editor
             {
                 Object.DestroyImmediate(root);
             }
+        }
+
+        private static BoundsOutlineView Outline(GameObject parent, string name, Material valid, Material refused, float width)
+        {
+            var go = new GameObject(name, typeof(LineRenderer), typeof(BoundsOutlineView));
+            go.transform.SetParent(parent.transform, false);
+            ConfigureLine(go.GetComponent<LineRenderer>(), valid, width);
+
+            var view = go.GetComponent<BoundsOutlineView>();
+            Assign(view, ("_validMaterial", valid), ("_invalidMaterial", refused));
+            return view;
         }
 
         private static void BuildRigVariant(GameObject rigBase, string name, Type inputType, Type aimType)
@@ -540,9 +684,7 @@ namespace CampfireFriends.Construction.Editor
         /// </summary>
         private static bool WireRayRig(Scene scene)
         {
-            var controllers = FindInScene<Controller>(scene);
-            var right = controllers.FirstOrDefault(c => c.name.Contains("Right"));
-            var left = controllers.FirstOrDefault(c => c.name.Contains("Left"));
+            var right = FindInScene<Controller>(scene).FirstOrDefault(c => c.name.Contains("Right"));
             if (right == null)
             {
                 Debug.LogWarning($"[BuildKit] {scene.name}: no Interaction SDK RightController found, build rig not wired. " +
@@ -561,11 +703,11 @@ namespace CampfireFriends.Construction.Editor
             Assign(rig.GetComponent<RayInteractorAim>(), ("_rayInteractor", ray));
             Assign(rig.GetComponent<RayInteractorBuildInput>(),
                 ("_confirmSelector", selector),
-                ("_mainHand", rayController != null ? rayController : (Object)right),
-                ("_offHand", left));
+                ("_mainHand", rayController != null ? rayController : (Object)right));
 
             EnsurePointableEventSystem(scene);
             WireMenus(scene, rig.GetComponent<BuildController>());
+            WireModifyMenu(scene, rig.GetComponent<BuildController>());
 
             EditorSceneManager.MarkSceneDirty(scene);
             Debug.Log($"[BuildKit] {scene.name}: build rig wired to {ray.name} on {right.name}.", rig);

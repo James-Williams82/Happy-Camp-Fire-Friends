@@ -27,14 +27,16 @@ namespace CampfireFriends.Building
         public bool TryGetDefinition(string pieceId, out PieceDefinition definition) => _pieces.TryGet(pieceId, out definition);
 
         /// <param name="stock">The stock to check the cost against, or null to skip the cost check.</param>
-        public PlacementRejection ValidatePlacement(string pieceId, Vector3Int min, GridRotation rotation, IStockView stock)
+        /// <param name="ignorePlacedId">A placed piece to treat as absent: the one being moved.</param>
+        public PlacementRejection ValidatePlacement(string pieceId, Vector3Int min, GridRotation rotation, IStockView stock,
+            int ignorePlacedId = BuildWorld.NoPiece)
         {
             if (!_pieces.TryGet(pieceId, out var definition)) return PlacementRejection.UnknownPiece;
 
             var bounds = definition.BoundsAt(min, rotation);
-            if (!_world.IsFree(bounds)) return PlacementRejection.Occupied;
+            if (!_world.IsFree(bounds, ignorePlacedId)) return PlacementRejection.Occupied;
             if (_environment.IsObstructed(bounds)) return PlacementRejection.Obstructed;
-            if (!_support.IsSupported(definition.Support, bounds)) return PlacementRejection.NoSupport;
+            if (!_support.IsSupported(definition.Support, bounds, ignorePlacedId, ignorePlacedId)) return PlacementRejection.NoSupport;
             if (stock != null && !stock.CanAfford(definition.Cost)) return PlacementRejection.InsufficientMaterials;
 
             return PlacementRejection.None;
@@ -52,6 +54,20 @@ namespace CampfireFriends.Building
             if (FindDependent(piece) != BuildWorld.NoPiece) return PlacementRejection.HasDependents;
 
             return PlacementRejection.None;
+        }
+
+        /// <summary>
+        /// Moving (or turning in place) is a removal and a placement at once: refused while anything
+        /// depends on the piece, then checked at the new pose with the piece's old cells free. Moves
+        /// cost nothing.
+        /// </summary>
+        public PlacementRejection ValidateMove(int placedId, Vector3Int min, GridRotation rotation)
+        {
+            var rejection = ValidateRemoval(placedId);
+            if (rejection != PlacementRejection.None) return rejection;
+
+            _world.TryGet(placedId, out var piece);
+            return ValidatePlacement(piece.PieceId, min, rotation, null, placedId);
         }
 
         /// <summary>The first touching piece that would lose its support if <paramref name="piece"/> were removed.</summary>

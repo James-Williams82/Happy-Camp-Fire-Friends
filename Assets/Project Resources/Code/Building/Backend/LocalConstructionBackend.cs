@@ -67,5 +67,11 @@ namespace CampfireFriends.Construction
             var rejection = _service.TryRemove(placedId);
             if (rejection != PlacementRejection.None) RequestRejected?.Invoke(rejection);
         }
+
+        public void RequestMove(int placedId, Vector3Int min, GridRotation rotation)
+        {
+            var rejection = _service.TryMove(placedId, min, rotation);
+            if (rejection != PlacementRejection.None) RequestRejected?.Invoke(rejection);
+        }
     }
 }

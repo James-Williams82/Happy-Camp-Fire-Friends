@@ -35,19 +35,35 @@ namespace CampfireFriends.Construction
     public sealed class BuildTargeter
     {
         private readonly TargetingSettings _settings;
+        private readonly RaycastHit[] _hits = new RaycastHit[16];
 
         public BuildTargeter(TargetingSettings settings) => _settings = settings ?? new TargetingSettings();
 
-        public BuildTarget Target(Ray ray)
+        /// <param name="ignorePlacedId">A placed piece the pointer passes through: the one being moved.</param>
+        public BuildTarget Target(Ray ray, int ignorePlacedId = BuildWorld.NoPiece)
         {
-            if (!Physics.Raycast(ray, out var hit, _settings.MaxDistance, _settings.Layers, QueryTriggerInteraction.Ignore))
-                return new BuildTarget(BuildAim.Nothing, null, ray.GetPoint(_settings.MaxDistance));
+            int count = Physics.RaycastNonAlloc(ray, _hits, _settings.MaxDistance, _settings.Layers, QueryTriggerInteraction.Ignore);
 
-            var piece = hit.collider.GetComponentInParent<PieceView>();
-            if (piece != null && piece.IsPlaced)
-                return new BuildTarget(BuildAim.AtPiece(piece.PlacedId, hit.point, hit.normal), piece, hit.point);
+            RaycastHit? nearest = null;
+            PieceView nearestPiece = null;
+            for (int i = 0; i < count; i++)
+            {
+                var hit = _hits[i];
+                if (nearest.HasValue && hit.distance >= nearest.Value.distance) continue;
 
-            return new BuildTarget(BuildAim.AtScene(hit.point, hit.normal), null, hit.point);
+                var piece = hit.collider.GetComponentInParent<PieceView>();
+                if (piece != null && ignorePlacedId != BuildWorld.NoPiece && piece.PlacedId == ignorePlacedId) continue;
+
+                nearest = hit;
+                nearestPiece = piece != null && piece.IsPlaced ? piece : null;
+            }
+
+            if (!nearest.HasValue) return new BuildTarget(BuildAim.Nothing, null, ray.GetPoint(_settings.MaxDistance));
+
+            var h = nearest.Value;
+            return nearestPiece != null
+                ? new BuildTarget(BuildAim.AtPiece(nearestPiece.PlacedId, h.point, h.normal), nearestPiece, h.point)
+                : new BuildTarget(BuildAim.AtScene(h.point, h.normal), null, h.point);
         }
     }
 }

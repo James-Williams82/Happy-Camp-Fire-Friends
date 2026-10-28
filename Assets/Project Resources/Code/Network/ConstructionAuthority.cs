@@ -30,6 +30,7 @@ namespace CampfireFriends.Network
         private ConstructionService _service;
         private IStockView _replicatedStock;
         private readonly Dictionary<int, NetworkObject> _proxies = new Dictionary<int, NetworkObject>();
+        private readonly Dictionary<int, PlacedPieceProxy> _mirroredBy = new Dictionary<int, PlacedPieceProxy>();
 
         public PieceCatalog Catalog => _catalog;
         public BuildGrid Grid { get; private set; }
@@ -82,19 +83,33 @@ namespace CampfireFriends.Network
 
         public void RequestRemove(int placedId) => RPC_RequestRemove(placedId);
 
-        /// <summary>Client side: a piece proxy arrived, so add it to the mirror world.</summary>
+        public void RequestMove(int placedId, Vector3Int min, GridRotation rotation) =>
+            RPC_RequestMove(placedId, min, (byte)rotation);
+
+        /// <summary>
+        /// Client side: a piece proxy arrived, so add it to the mirror world. A moved piece keeps its
+        /// id but gets a new proxy, which may arrive before the old one leaves: the newest proxy wins.
+        /// </summary>
         internal void Mirror(PlacedPieceProxy proxy)
         {
-            if (HasStateAuthority || World == null || World.Contains(proxy.PlacedId)) return;
+            if (HasStateAuthority || World == null) return;
 
             var piece = proxy.ToPlacedPiece();
-            if (piece != null) World.Add(piece);
+            if (piece == null) return;
+
+            World.Remove(piece.Id);
+            World.Add(piece);
+            _mirroredBy[piece.Id] = proxy;
         }
 
-        /// <summary>Client side: a piece proxy left, so drop it from the mirror world.</summary>
-        internal void Unmirror(int placedId)
+        /// <summary>Client side: a piece proxy left, so drop its piece unless a newer proxy now owns that id.</summary>
+        internal void Unmirror(int placedId, PlacedPieceProxy proxy)
         {
-            if (!HasStateAuthority && World != null) World.Remove(placedId);
+            if (HasStateAuthority || World == null) return;
+            if (_mirroredBy.TryGetValue(placedId, out var owner) && owner != proxy) return;
+
+            _mirroredBy.Remove(placedId);
+            World.Remove(placedId);
         }
 
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -117,6 +132,13 @@ namespace CampfireFriends.Network
         private void RPC_RequestRemove(int placedId, RpcInfo info = default)
         {
             var rejection = _service.TryRemove(placedId);
+            if (rejection != PlacementRejection.None) RPC_RequestRejected(SourceOf(info), (int)rejection);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        private void RPC_RequestMove(int placedId, Vector3Int min, byte rotation, RpcInfo info = default)
+        {
+            var rejection = _service.TryMove(placedId, min, (GridRotation)(rotation & 3));
             if (rejection != PlacementRejection.None) RPC_RequestRejected(SourceOf(info), (int)rejection);
         }
 

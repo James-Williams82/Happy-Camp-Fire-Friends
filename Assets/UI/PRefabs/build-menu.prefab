@@ -58,6 +58,10 @@ MonoBehaviour:
   - {fileID: 6206059967305508434}
   _labelName: Label
   _subtitleName: Subtitle
+  _panel: {fileID: 0}
+  _viewer: {fileID: 0}
+  _distance: 0.6
+  _heightBelowEyes: 0.25
 --- !u!1001 &564987585366223409
 PrefabInstance:
   m_ObjectHideFlags: 0

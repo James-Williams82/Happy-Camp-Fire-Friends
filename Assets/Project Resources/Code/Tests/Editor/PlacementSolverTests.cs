@@ -107,7 +107,7 @@ namespace CampfireFriends.Tests
 
         [TestCase(0.1f, 0, Alignment.Min, TestName = "SideHit_Bottom_AlignsBottoms")]   // GEO-07
         [TestCase(1.0f, 1, Alignment.Center, TestName = "SideHit_Middle_AlignsCentres")] // GEO-08
-        [TestCase(1.9f, 2, Alignment.Max, TestName = "SideHit_Top_AlignsTops")]         // GEO-09
+        [TestCase(1.6f, 2, Alignment.Max, TestName = "SideHit_Top_AlignsTops")]         // GEO-09 (below the top edge band)
         public void SideHit_VerticalIntent(float aimHeight, int expectedMinY, Alignment expected)
         {
             var target = _kit.PlaceOrFail("wall", Vector3Int.zero);
@@ -123,7 +123,7 @@ namespace CampfireFriends.Tests
         {
             var longWall = LongWall();
 
-            var proposal = _kit.AimAtPiece("wall", longWall, new Vector3(3.9f, 0.2f, 0.5f), Vector3.forward, GridRotation.R90);
+            var proposal = _kit.AimAtPiece("wall", longWall, new Vector3(3.5f, 0.2f, 0.5f), Vector3.forward, GridRotation.R90); // just outside the end band
 
             Assert.AreEqual(Alignment.Max, proposal.AlignX);
             Assert.AreEqual(longWall.Bounds.Max.x, proposal.Bounds.Max.x, "Corner must be flush with the wall's end.");
@@ -135,7 +135,7 @@ namespace CampfireFriends.Tests
         {
             var longWall = LongWall();
 
-            var proposal = _kit.AimAtPiece("wall", longWall, new Vector3(0.1f, 0.2f, 0.5f), Vector3.forward, GridRotation.R90);
+            var proposal = _kit.AimAtPiece("wall", longWall, new Vector3(0.5f, 0.2f, 0.5f), Vector3.forward, GridRotation.R90); // just outside the end band
 
             Assert.AreEqual(Alignment.Min, proposal.AlignX);
             Assert.AreEqual(longWall.Bounds.Min.x, proposal.Bounds.Min.x);

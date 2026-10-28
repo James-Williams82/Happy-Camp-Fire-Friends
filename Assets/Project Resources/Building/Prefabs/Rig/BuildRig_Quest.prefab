@@ -106,11 +106,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CampfireFriends.Construction.RayInteractorBuildInput
   _confirmSelector: {fileID: 0}
   _mainHand: {fileID: 0}
-  _offHand: {fileID: 0}
+  _toggleBuild: 128
   _rotate: 1
-  _nextPiece: 4
-  _cycleMode: 1
-  _previousPiece: 4
+  _back: 4
 --- !u!114 &8853843166391169641
 MonoBehaviour:
   m_ObjectHideFlags: 0

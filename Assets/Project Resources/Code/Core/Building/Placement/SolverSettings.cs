@@ -21,5 +21,11 @@ namespace CampfireFriends.Building
 
         [Tooltip("Scenery faces whose normal has at least this much up are treated as ground.")]
         [Range(0f, 1f)] public float GroundNormalMinY = 0.7f;
+
+        [Tooltip("Depth of the edge bands on a piece's side faces, as a fraction of the face. Aiming in the top band places on top; in a side band, extends the row. 0 turns edge placement off.")]
+        [Range(0f, 0.5f)] public float EdgeBandFraction = 0.25f;
+
+        [Tooltip("Metres. The deepest an edge band gets, so tall walls keep most of their face for face placement.")]
+        [Min(0f)] public float EdgeBandMaxDepth = 0.3f;
     }
 }

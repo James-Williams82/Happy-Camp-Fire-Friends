@@ -25,6 +25,9 @@ namespace CampfireFriends.Construction
         void RequestPlace(string pieceId, Vector3Int min, GridRotation rotation);
         void RequestRemove(int placedId);
 
+        /// <summary>Moves or turns a placed piece. Free, and refused while anything rests on it.</summary>
+        void RequestMove(int placedId, Vector3Int min, GridRotation rotation);
+
         /// <summary>Raised on the requesting machine when the authority refuses a request.</summary>
         event Action<PlacementRejection> RequestRejected;
     }

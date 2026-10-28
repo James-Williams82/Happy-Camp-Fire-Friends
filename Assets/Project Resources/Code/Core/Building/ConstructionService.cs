@@ -84,6 +84,23 @@ namespace CampfireFriends.Building
         }
 
         /// <summary>
+        /// Moves or turns a placed piece, keeping its id, owner and health. Validated first, so a
+        /// refused move leaves the world untouched.
+        /// </summary>
+        public PlacementRejection TryMove(int placedId, Vector3Int min, GridRotation rotation)
+        {
+            var rejection = _validator.ValidateMove(placedId, min, rotation);
+            if (rejection != PlacementRejection.None) return rejection;
+
+            _world.TryGet(placedId, out var piece);
+            _validator.TryGetDefinition(piece.PieceId, out var definition);
+
+            _world.Remove(placedId);
+            _world.Add(new PlacedPiece(piece.Id, piece.PieceId, definition.BoundsAt(min, rotation), rotation, piece.PlacedBy, piece.Health));
+            return PlacementRejection.None;
+        }
+
+        /// <summary>
         /// Re-inserts a piece from a save without charging materials (X01 restore path). Support is
         /// not rechecked because pieces load in arbitrary order. Unknown ids fail loudly (VAL-11).
         /// </summary>

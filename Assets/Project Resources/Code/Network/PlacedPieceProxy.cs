@@ -79,7 +79,7 @@ namespace CampfireFriends.Network
         public override void Despawned(NetworkRunner runner, bool hasState)
         {
             ActiveProxies.Remove(this);
-            if (ConstructionAuthority.Instance != null) ConstructionAuthority.Instance.Unmirror(_spawnedId);
+            if (ConstructionAuthority.Instance != null) ConstructionAuthority.Instance.Unmirror(_spawnedId, this);
         }
     }
 }
