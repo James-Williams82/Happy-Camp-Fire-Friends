@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3235d384f5ef18e46a430f27fcc3c060, type: 3}
+  m_Name: BuildSounds
+  m_EditorClassIdentifier: Assembly-CSharp::CampfireFriends.Construction.BuildSoundSet
+  Place:
+    All: []
+    Small:
+    - {fileID: 8300000, guid: ea29864802fac0144a82c7e3a5ef8727, type: 3}
+    Medium:
+    - {fileID: 8300000, guid: 3f3ffdfe653be4c4181b60cbba35df3c, type: 3}
+    Large:
+    - {fileID: 8300000, guid: f2283fae01957574f8fe971e59c519ba, type: 3}
+  Remove:
+    All:
+    - {fileID: 8300000, guid: 84910624fe0a8b84bb6748ec9e64b5e6, type: 3}
+    Small: []
+    Medium: []
+    Large: []
+  Move:
+    All:
+    - {fileID: 8300000, guid: bd54ad8de536200499d5e3de68c1b82e, type: 3}
+    Small: []
+    Medium: []
+    Large: []
+  Use:
+    All: []
+    Small: []
+    Medium: []
+    Large: []
+  Refused:
+  - {fileID: 8300000, guid: 023b9818d73004b4ba202936bebc2660, type: 3}
+  Select:
+  - {fileID: 8300000, guid: aa08eaf7f321e664fa3e4dac0572b1ec, type: 3}
+  MenuPick:
+  - {fileID: 8300000, guid: b93154cc42bea944e98f2ff776c61b53, type: 3}
+  ModeOn:
+  - {fileID: 8300000, guid: be84a945bec7ed845b4801e86763fba6, type: 3}
+  ModeOff: []
+  PitchJitter: 0.06

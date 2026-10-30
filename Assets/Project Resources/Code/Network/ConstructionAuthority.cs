@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CampfireFriends.Building;
 using CampfireFriends.Construction;
+using CampfireFriends.Game;
 using CampfireFriends.Supplies;
 using Fusion;
 using UnityEngine;
@@ -38,6 +39,9 @@ namespace CampfireFriends.Network
         public PlacementValidator Validator { get; private set; }
         public IStockView Stock => _hostStock != null ? _hostStock : _replicatedStock;
 
+        /// <summary>The session's mode (the host's, on every peer) decides; the host's service enforces it.</summary>
+        public bool FreeBuilding => GameModes.Rules.FreeBuilding;
+
         /// <summary>The authoritative stock. Null on clients.</summary>
         public SharedStock HostStock => _hostStock;
 
@@ -59,9 +63,10 @@ namespace CampfireFriends.Network
                 _hostStock.StockChanged += (type, amount) => StockAmounts.Set((int)type, amount);
                 _hostStock.Add(_startingStock);
 
-                _service = new ConstructionService(World, Validator, _hostStock);
+                _service = new ConstructionService(World, Validator, _hostStock) { FreeBuilding = FreeBuilding };
                 World.Added += SpawnProxy;
                 World.Removed += DespawnProxy;
+                World.StateChanged += UpdateProxyState;
             }
             else
             {
@@ -85,6 +90,8 @@ namespace CampfireFriends.Network
 
         public void RequestMove(int placedId, Vector3Int min, GridRotation rotation) =>
             RPC_RequestMove(placedId, min, (byte)rotation);
+
+        public void RequestUse(int placedId) => RPC_RequestUse(placedId);
 
         /// <summary>
         /// Client side: a piece proxy arrived, so add it to the mirror world. A moved piece keeps its
@@ -135,6 +142,22 @@ namespace CampfireFriends.Network
             if (rejection != PlacementRejection.None) RPC_RequestRejected(SourceOf(info), (int)rejection);
         }
 
+        /// <summary>Client side: a piece proxy's replicated state changed, so update the mirror world to match.</summary>
+        internal void MirrorState(PlacedPieceProxy proxy)
+        {
+            if (HasStateAuthority || World == null) return;
+            if (!_mirroredBy.TryGetValue(proxy.PlacedId, out var owner) || owner != proxy) return;
+
+            World.SetOn(proxy.PlacedId, proxy.On);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+        private void RPC_RequestUse(int placedId, RpcInfo info = default)
+        {
+            var rejection = _service.TryUse(placedId);
+            if (rejection != PlacementRejection.None) RPC_RequestRejected(SourceOf(info), (int)rejection);
+        }
+
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
         private void RPC_RequestMove(int placedId, Vector3Int min, byte rotation, RpcInfo info = default)
         {
@@ -160,6 +183,12 @@ namespace CampfireFriends.Network
                 onBeforeSpawned: (runner, obj) => obj.GetComponent<PlacedPieceProxy>().Init(piece, pieceIndex));
 
             _proxies[piece.Id] = spawned;
+        }
+
+        private void UpdateProxyState(PlacedPiece piece)
+        {
+            if (_proxies.TryGetValue(piece.Id, out var spawned) && spawned != null)
+                spawned.GetComponent<PlacedPieceProxy>().On = piece.On;
         }
 
         private void DespawnProxy(PlacedPiece piece)

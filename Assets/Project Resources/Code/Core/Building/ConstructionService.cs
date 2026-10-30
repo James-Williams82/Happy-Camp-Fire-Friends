@@ -53,16 +53,19 @@ namespace CampfireFriends.Building
             _stock = stock ?? throw new ArgumentNullException(nameof(stock));
         }
 
+        /// <summary>Creative play: pieces cost nothing and removing them refunds nothing. Every other rule still applies.</summary>
+        public bool FreeBuilding { get; set; }
+
         public PlacementResult TryPlace(PlacementRequest request)
         {
-            var rejection = _validator.ValidatePlacement(request.PieceId, request.Min, request.Rotation, _stock);
+            var rejection = _validator.ValidatePlacement(request.PieceId, request.Min, request.Rotation, FreeBuilding ? null : _stock);
             if (rejection != PlacementRejection.None) return Reject(request, rejection);
 
             _validator.TryGetDefinition(request.PieceId, out var definition);
 
             // Validation just confirmed affordability, so this cannot fail; checked anyway so a
             // future refactor can't silently build for free.
-            if (!_stock.TrySpend(definition.Cost)) return Reject(request, PlacementRejection.InsufficientMaterials);
+            if (!FreeBuilding && !_stock.TrySpend(definition.Cost)) return Reject(request, PlacementRejection.InsufficientMaterials);
 
             var piece = new PlacedPiece(_nextId++, definition.Id, definition.BoundsAt(request.Min, request.Rotation),
                 request.Rotation, request.RequestedBy, definition.MaxHealth);
@@ -79,7 +82,7 @@ namespace CampfireFriends.Building
             _validator.TryGetDefinition(piece.PieceId, out var definition);
 
             _world.Remove(placedId);
-            if (definition.RefundOnRemove) _stock.Add(definition.Cost);
+            if (definition.RefundOnRemove && !FreeBuilding) _stock.Add(definition.Cost);
             return PlacementRejection.None;
         }
 
@@ -96,7 +99,18 @@ namespace CampfireFriends.Building
             _validator.TryGetDefinition(piece.PieceId, out var definition);
 
             _world.Remove(placedId);
-            _world.Add(new PlacedPiece(piece.Id, piece.PieceId, definition.BoundsAt(min, rotation), rotation, piece.PlacedBy, piece.Health));
+            _world.Add(new PlacedPiece(piece.Id, piece.PieceId, definition.BoundsAt(min, rotation), rotation, piece.PlacedBy, piece.Health, piece.On));
+            return PlacementRejection.None;
+        }
+
+        /// <summary>Uses a placed piece: a toggle piece switches on or off. Free, and only for usable pieces.</summary>
+        public PlacementRejection TryUse(int placedId)
+        {
+            var rejection = _validator.ValidateUse(placedId);
+            if (rejection != PlacementRejection.None) return rejection;
+
+            _world.TryGet(placedId, out var piece);
+            _world.SetOn(placedId, !piece.On);
             return PlacementRejection.None;
         }
 

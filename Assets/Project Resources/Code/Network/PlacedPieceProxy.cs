@@ -10,7 +10,8 @@ namespace CampfireFriends.Network
     /// The networked stand-in for one committed piece. A single Fusion prefab serves every piece type:
     /// it replicates the piece's durable data, builds its <see cref="PieceView"/> from the catalog, and
     /// feeds the client's mirror world. Pieces don't move, so the pose is derived from the grid
-    /// instead of being synced.
+    /// instead of being synced. State that changes in place (a light switched on) is synced and
+    /// shown as it arrives.
     /// </summary>
     public class PlacedPieceProxy : NetworkBehaviour
     {
@@ -24,11 +25,15 @@ namespace CampfireFriends.Network
         [Networked] public byte Rotation { get; set; }
         [Networked] public int PlacedBy { get; set; }
         [Networked] public int Health { get; set; }
+        [Networked] public NetworkBool On { get; set; }
 
         private PieceView _view;
 
         // Networked state may be gone by Despawned, so remember which piece this was.
         private int _spawnedId;
+
+        // The state the view and mirror last showed, to notice replicated changes.
+        private bool _shownOn;
 
         public static IReadOnlyList<PlacedPieceProxy> Active => ActiveProxies;
 
@@ -43,6 +48,7 @@ namespace CampfireFriends.Network
             Rotation = (byte)piece.Rotation;
             PlacedBy = piece.PlacedBy;
             Health = piece.Health;
+            On = piece.On;
         }
 
         public PlacedPiece ToPlacedPiece()
@@ -51,7 +57,7 @@ namespace CampfireFriends.Network
             if (definition == null) return null;
 
             var rotation = (GridRotation)(Rotation & 3);
-            return new PlacedPiece(PlacedId, definition.Id, definition.BoundsAt(Min, rotation), rotation, PlacedBy, Health);
+            return new PlacedPiece(PlacedId, definition.Id, definition.BoundsAt(Min, rotation), rotation, PlacedBy, Health, On);
         }
 
         public override void Spawned()
@@ -72,8 +78,18 @@ namespace CampfireFriends.Network
 
             _view = PieceViewSpawner.Create(Definition, transform);
             if (_view != null) _view.BindPlaced(piece, Definition, grid);
+            _shownOn = piece.On;
 
             if (ConstructionAuthority.Instance != null) ConstructionAuthority.Instance.Mirror(this);
+        }
+
+        public override void Render()
+        {
+            if (On == _shownOn) return;
+            _shownOn = On;
+
+            if (_view != null) _view.ShowState(_shownOn);
+            if (ConstructionAuthority.Instance != null) ConstructionAuthority.Instance.MirrorState(this);
         }
 
         public override void Despawned(NetworkRunner runner, bool hasState)

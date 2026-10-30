@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b647804ced7d428cdc19641c9373c, type: 3}
+  m_Name: Piece_ClimbingWall
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
+  Id: climbing_wall
+  DisplayName: Climbing Wall
+  Hint: Grip anywhere on it to climb. Let go at the top to climb over.
+  Footprint: {x: 2, y: 4, z: 1}
+  Support: 0
+  Cost:
+  - Type: 0
+    Amount: 4
+  Removable: 1
+  RefundOnRemove: 1
+  MaxHealth: 100
+  Size: 2
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
+  Prefab: {fileID: 3289341769012591308, guid: cbf0d17c3b6d0894c8b0bc0a55efcb06, type: 3}

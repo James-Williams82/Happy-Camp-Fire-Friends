@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: half_block
   DisplayName: Half Block
+  Hint: 
   Footprint: {x: 1, y: 1, z: 1}
   Support: 0
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 0
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 4470704210739533981, guid: 1d72f589bf4b38a42b0282e13dfb3b9c, type: 3}

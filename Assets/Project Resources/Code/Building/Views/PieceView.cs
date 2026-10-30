@@ -39,6 +39,13 @@ namespace CampfireFriends.Construction
             PlacedId = piece.Id;
             name = $"{definition.Id} #{piece.Id}";
             Present(definition, grid, piece.Bounds, piece.Rotation);
+            ShowState(piece.On);
+        }
+
+        /// <summary>Shows in-place state (a light switched on) on this piece's state views.</summary>
+        public void ShowState(bool on)
+        {
+            foreach (var view in GetComponentsInChildren<PieceStateView>(true)) view.Show(on);
         }
 
         /// <summary>Turns this instance into a ghost: nothing can hit it and it never blocks anything.</summary>

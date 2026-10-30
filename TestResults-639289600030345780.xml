@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="170" result="Passed" total="170" passed="170" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.1428927">
+  <test-suite type="TestSuite" id="1000" name="Camp Fire Friends" fullname="Camp Fire Friends" runstate="Runnable" testcasecount="170" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.142893" total="170" passed="170" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1191" name="CampfireFriends.Tests.Editor.dll" fullname="C:/Users/james/Documents/GitHub/Happy-Camp-Fire-Friends/Library/ScriptAssemblies/CampfireFriends.Tests.Editor.dll" runstate="Runnable" testcasecount="170" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.133890" total="170" passed="170" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="8196" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1192" name="CampfireFriends" fullname="CampfireFriends" runstate="Runnable" testcasecount="170" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.132203" total="170" passed="170" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1193" name="Tests" fullname="CampfireFriends.Tests" runstate="Runnable" testcasecount="170" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.130774" total="170" passed="170" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="AmbienceTests" fullname="CampfireFriends.Tests.AmbienceTests" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.026699" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1007" name="Gusts_AreCalmer_WithLowGustiness" fullname="CampfireFriends.Tests.AmbienceTests.Gusts_AreCalmer_WithLowGustiness" methodname="Gusts_AreCalmer_WithLowGustiness" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="430693250" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.010597" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="Gusts_AreRepeatable_ForTheSameSeed" fullname="CampfireFriends.Tests.AmbienceTests.Gusts_AreRepeatable_ForTheSameSeed" methodname="Gusts_AreRepeatable_ForTheSameSeed" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="106266156" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002706" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1005" name="Gusts_StayInRange_AndVary" fullname="CampfireFriends.Tests.AmbienceTests.Gusts_StayInRange_AndVary" methodname="Gusts_StayInRange_AndVary" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="790258454" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000895" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="Scatter_IsSilent_OutOfItsTimeOfDay" fullname="CampfireFriends.Tests.AmbienceTests.Scatter_IsSilent_OutOfItsTimeOfDay" methodname="Scatter_IsSilent_OutOfItsTimeOfDay" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="198199109" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000606" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="Scatter_PlaysWithinItsIntervals" fullname="CampfireFriends.Tests.AmbienceTests.Scatter_PlaysWithinItsIntervals" methodname="Scatter_PlaysWithinItsIntervals" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="579840634" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000246" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="Scatter_ThinsOut_AsPresenceFalls" fullname="CampfireFriends.Tests.AmbienceTests.Scatter_ThinsOut_AsPresenceFalls" methodname="Scatter_ThinsOut_AsPresenceFalls" classname="CampfireFriends.Tests.AmbienceTests" runstate="Runnable" seed="928831385" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000492" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1008" name="BuildToolStateTests" fullname="CampfireFriends.Tests.BuildToolStateTests" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.005998" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1020" name="Back_FromPlace_PutsThePieceAway" fullname="CampfireFriends.Tests.BuildToolStateTests.Back_FromPlace_PutsThePieceAway" methodname="Back_FromPlace_PutsThePieceAway" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="478419952" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000862" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="Back_StepsMoveModifyBrowse" fullname="CampfireFriends.Tests.BuildToolStateTests.Back_StepsMoveModifyBrowse" methodname="Back_StepsMoveModifyBrowse" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="1752317809" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000250" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1018" name="BeginMove_OnlyFromModify" fullname="CampfireFriends.Tests.BuildToolStateTests.BeginMove_OnlyFromModify" methodname="BeginMove_OnlyFromModify" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="1993521820" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000090" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="BeginMove_StartsFromThePiecesRotation_AndRotatesIndependently" fullname="CampfireFriends.Tests.BuildToolStateTests.BeginMove_StartsFromThePiecesRotation_AndRotatesIndependently" methodname="BeginMove_StartsFromThePiecesRotation_AndRotatesIndependently" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="2107584851" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000218" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="Changed_FiresOnlyOnRealChanges" fullname="CampfireFriends.Tests.BuildToolStateTests.Changed_FiresOnlyOnRealChanges" methodname="Changed_FiresOnlyOnRealChanges" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="1659757226" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000196" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="Cycle_OnlyWhilePlacing_WrapsBothWays" fullname="CampfireFriends.Tests.BuildToolStateTests.Cycle_OnlyWhilePlacing_WrapsBothWays" methodname="Cycle_OnlyWhilePlacing_WrapsBothWays" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="1047232781" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000186" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="Deselect_AfterAMove_ClosesTheModifyMenu" fullname="CampfireFriends.Tests.BuildToolStateTests.Deselect_AfterAMove_ClosesTheModifyMenu" methodname="Deselect_AfterAMove_ClosesTheModifyMenu" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="262725347" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000097" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="EmptyPalette_NeverEntersPlace" fullname="CampfireFriends.Tests.BuildToolStateTests.EmptyPalette_NeverEntersPlace" methodname="EmptyPalette_NeverEntersPlace" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="916559766" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001037" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1016" name="Inspect_OpensModify_ForThatPiece" fullname="CampfireFriends.Tests.BuildToolStateTests.Inspect_OpensModify_ForThatPiece" methodname="Inspect_OpensModify_ForThatPiece" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="1034528317" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000145" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="Off_IgnoresEverything" fullname="CampfireFriends.Tests.BuildToolStateTests.Off_IgnoresEverything" methodname="Off_IgnoresEverything" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="474391250" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000185" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1015" name="Rotate_WrapsAfterFourTurns" fullname="CampfireFriends.Tests.BuildToolStateTests.Rotate_WrapsAfterFourTurns" methodname="Rotate_WrapsAfterFourTurns" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="20574731" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000107" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="Select_StartsPlacing_IgnoresBadSlots" fullname="CampfireFriends.Tests.BuildToolStateTests.Select_StartsPlacing_IgnoresBadSlots" methodname="Select_StartsPlacing_IgnoresBadSlots" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="639944062" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000100" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="StartsOff" fullname="CampfireFriends.Tests.BuildToolStateTests.StartsOff" methodname="StartsOff" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="135001968" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000078" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="ToggleBuild_EntersWithNothingSelected" fullname="CampfireFriends.Tests.BuildToolStateTests.ToggleBuild_EntersWithNothingSelected" methodname="ToggleBuild_EntersWithNothingSelected" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="505444929" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000089" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="ToggleBuild_FromAnyMode_TurnsOffAndForgetsSelection" fullname="CampfireFriends.Tests.BuildToolStateTests.ToggleBuild_FromAnyMode_TurnsOffAndForgetsSelection" methodname="ToggleBuild_FromAnyMode_TurnsOffAndForgetsSelection" classname="CampfireFriends.Tests.BuildToolStateTests" runstate="Runnable" seed="78934143" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000112" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1024" name="ClimbingTests" fullname="CampfireFriends.Tests.ClimbingTests" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.004569" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1033" name="Fall_IsCappedAtTerminalSpeed" fullname="CampfireFriends.Tests.ClimbingTests.Fall_IsCappedAtTerminalSpeed" methodname="Fall_IsCappedAtTerminalSpeed" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="1038284918" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000912" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1032" name="Fall_OnTheGround_DoesNothing" fullname="CampfireFriends.Tests.ClimbingTests.Fall_OnTheGround_DoesNothing" methodname="Fall_OnTheGround_DoesNothing" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="650938162" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000098" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1031" name="Fall_SpeedsUp_AndLandsExactlyOnTheGround" fullname="CampfireFriends.Tests.ClimbingTests.Fall_SpeedsUp_AndLandsExactlyOnTheGround" methodname="Fall_SpeedsUp_AndLandsExactlyOnTheGround" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="1540012830" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000213" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1028" name="LettingGoWithBothHands_EndsTheClimb" fullname="CampfireFriends.Tests.ClimbingTests.LettingGoWithBothHands_EndsTheClimb" methodname="LettingGoWithBothHands_EndsTheClimb" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="2107694679" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001116" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1027" name="LettingGoWithOneHand_PassesTheClimbToTheOther" fullname="CampfireFriends.Tests.ClimbingTests.LettingGoWithOneHand_PassesTheClimbToTheOther" methodname="LettingGoWithOneHand_PassesTheClimbToTheOther" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="217500162" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000168" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="PullingTheHandDown_LiftsTheBody" fullname="CampfireFriends.Tests.ClimbingTests.PullingTheHandDown_LiftsTheBody" methodname="PullingTheHandDown_LiftsTheBody" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="113929654" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000186" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="Regrip_MovesTheHoldToWhereTheHandIsNow" fullname="CampfireFriends.Tests.ClimbingTests.Regrip_MovesTheHoldToWhereTheHandIsNow" methodname="Regrip_MovesTheHoldToWhereTheHandIsNow" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="1937288125" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000214" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1029" name="ReleasingAHandThatWasntHolding_ChangesNothing" fullname="CampfireFriends.Tests.ClimbingTests.ReleasingAHandThatWasntHolding_ChangesNothing" methodname="ReleasingAHandThatWasntHolding_ChangesNothing" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="1643371722" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000117" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1026" name="TheLastGrip_Leads" fullname="CampfireFriends.Tests.ClimbingTests.TheLastGrip_Leads" methodname="TheLastGrip_Leads" classname="CampfireFriends.Tests.ClimbingTests" runstate="Runnable" seed="249621925" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000185" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1034" name="ConstructionServiceTests" fullname="CampfireFriends.Tests.ConstructionServiceTests" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.019677" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1036" name="ContestedSpot_IsOnlyBuiltOnce_AndLoserPaysNothing" fullname="CampfireFriends.Tests.ConstructionServiceTests.ContestedSpot_IsOnlyBuiltOnce_AndLoserPaysNothing" methodname="ContestedSpot_IsOnlyBuiltOnce_AndLoserPaysNothing" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="1356556753" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.009775" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="FailedPlacement_ChangesNothing" fullname="CampfireFriends.Tests.ConstructionServiceTests.FailedPlacement_ChangesNothing" methodname="FailedPlacement_ChangesNothing" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="1669987312" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000472" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="NonRemovablePiece_StaysPut" fullname="CampfireFriends.Tests.ConstructionServiceTests.NonRemovablePiece_StaysPut" methodname="NonRemovablePiece_StaysPut" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="1029170649" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000503" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1035" name="Place_SpendsOnce_AndClaimsFootprint" fullname="CampfireFriends.Tests.ConstructionServiceTests.Place_SpendsOnce_AndClaimsFootprint" methodname="Place_SpendsOnce_AndClaimsFootprint" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="446046386" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000300" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1038" name="Remove_ReleasesCells_AndRefundsOnce" fullname="CampfireFriends.Tests.ConstructionServiceTests.Remove_ReleasesCells_AndRefundsOnce" methodname="Remove_ReleasesCells_AndRefundsOnce" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="214760563" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002155" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="RemovingASupport_IsBlockedWhileSomethingRestsOnIt" fullname="CampfireFriends.Tests.ConstructionServiceTests.RemovingASupport_IsBlockedWhileSomethingRestsOnIt" methodname="RemovingASupport_IsBlockedWhileSomethingRestsOnIt" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="435556646" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000310" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1041" name="RemovingTheMiddleOfARoofRun_IsBlocked_RemovingTheEndIsNot" fullname="CampfireFriends.Tests.ConstructionServiceTests.RemovingTheMiddleOfARoofRun_IsBlocked_RemovingTheEndIsNot" methodname="RemovingTheMiddleOfARoofRun_IsBlocked_RemovingTheEndIsNot" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="657376820" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001237" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="RemovingTheWallUnderARoofRun_IsBlocked" fullname="CampfireFriends.Tests.ConstructionServiceTests.RemovingTheWallUnderARoofRun_IsBlocked" methodname="RemovingTheWallUnderARoofRun_IsBlocked" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="1042645399" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000377" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1043" name="ReplacingRotated_LeaksNoClaims" fullname="CampfireFriends.Tests.ConstructionServiceTests.ReplacingRotated_LeaksNoClaims" methodname="ReplacingRotated_LeaksNoClaims" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="1390749" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000317" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1044" name="Restore_KeepsIdsAndPose_AndChargesNothing" fullname="CampfireFriends.Tests.ConstructionServiceTests.Restore_KeepsIdsAndPose_AndChargesNothing" methodname="Restore_KeepsIdsAndPose_AndChargesNothing" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="956050569" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000566" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="Restore_UnknownPieceOrWrongFootprint_FailsLoudly" fullname="CampfireFriends.Tests.ConstructionServiceTests.Restore_UnknownPieceOrWrongFootprint_FailsLoudly" methodname="Restore_UnknownPieceOrWrongFootprint_FailsLoudly" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="2122324150" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001116" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="World_NeverAllowsTwoClaimsOnOneCell" fullname="CampfireFriends.Tests.ConstructionServiceTests.World_NeverAllowsTwoClaimsOnOneCell" methodname="World_NeverAllowsTwoClaimsOnOneCell" classname="CampfireFriends.Tests.ConstructionServiceTests" runstate="Runnable" seed="2081457653" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000366" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1047" name="EdgePlacementTests" fullname="CampfireFriends.Tests.EdgePlacementTests" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.011340" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1056" name="AimInsideSideEdge_ExtendsRow" fullname="CampfireFriends.Tests.EdgePlacementTests.AimInsideSideEdge_ExtendsRow" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.004075" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1054" name="SideEdge_High_ExtendsRow" fullname="CampfireFriends.Tests.EdgePlacementTests.SideEdge_High_ExtendsRow" methodname="AimInsideSideEdge_ExtendsRow" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1730746629" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.003309" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1055" name="SideEdge_Low_ExtendsRow" fullname="CampfireFriends.Tests.EdgePlacementTests.SideEdge_Low_ExtendsRow" methodname="AimInsideSideEdge_ExtendsRow" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1940829468" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000198" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1048" name="AimUnderTopEdge_OfBlockSide_StacksOnTop" fullname="CampfireFriends.Tests.EdgePlacementTests.AimUnderTopEdge_OfBlockSide_StacksOnTop" methodname="AimUnderTopEdge_OfBlockSide_StacksOnTop" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1569332760" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000593" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="AimUnderTopEdge_OfWallFront_StacksWallOnWall" fullname="CampfireFriends.Tests.EdgePlacementTests.AimUnderTopEdge_OfWallFront_StacksWallOnWall" methodname="AimUnderTopEdge_OfWallFront_StacksWallOnWall" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1195623433" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000322" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1058" name="BottomEdge_KeepsFacePlacement" fullname="CampfireFriends.Tests.EdgePlacementTests.BottomEdge_KeepsFacePlacement" methodname="BottomEdge_KeepsFacePlacement" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="2062122195" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000301" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1062" name="Corner_NearestEdgeWins" fullname="CampfireFriends.Tests.EdgePlacementTests.Corner_NearestEdgeWins" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001115" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1060" name="Corner_CloserToSide_ExtendsRow" fullname="CampfireFriends.Tests.EdgePlacementTests.Corner_CloserToSide_ExtendsRow" methodname="Corner_NearestEdgeWins" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="291677572" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000389" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="Corner_CloserToTop_StacksOnTop" fullname="CampfireFriends.Tests.EdgePlacementTests.Corner_CloserToTop_StacksOnTop" methodname="Corner_NearestEdgeWins" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="2083489907" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000151" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1064" name="EdgeBandsOff_KeepsFacePlacementEverywhere" fullname="CampfireFriends.Tests.EdgePlacementTests.EdgeBandsOff_KeepsFacePlacementEverywhere" methodname="EdgeBandsOff_KeepsFacePlacementEverywhere" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1758228332" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000318" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1059" name="MiddleOfFace_KeepsFacePlacement" fullname="CampfireFriends.Tests.EdgePlacementTests.MiddleOfFace_KeepsFacePlacement" methodname="MiddleOfFace_KeepsFacePlacement" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1526554595" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000281" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1057" name="SideEdge_OnRaisedPiece_KeepsItsBase" fullname="CampfireFriends.Tests.EdgePlacementTests.SideEdge_OnRaisedPiece_KeepsItsBase" methodname="SideEdge_OnRaisedPiece_KeepsItsBase" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="211837953" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000295" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1052" name="TopEdge_DeeperPiece_StaysFlushWithAimedFace" fullname="CampfireFriends.Tests.EdgePlacementTests.TopEdge_DeeperPiece_StaysFlushWithAimedFace" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001583" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1050" name="TopEdge_DeeperPiece_FlushWithFrontFace" fullname="CampfireFriends.Tests.EdgePlacementTests.TopEdge_DeeperPiece_FlushWithFrontFace" methodname="TopEdge_DeeperPiece_StaysFlushWithAimedFace" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1329878976" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000704" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1051" name="TopEdge_DeeperPiece_FlushWithBackFace" fullname="CampfireFriends.Tests.EdgePlacementTests.TopEdge_DeeperPiece_FlushWithBackFace" methodname="TopEdge_DeeperPiece_StaysFlushWithAimedFace" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="962892751" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000156" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1053" name="TopEdge_HalfBlock_HasAThinnerBand" fullname="CampfireFriends.Tests.EdgePlacementTests.TopEdge_HalfBlock_HasAThinnerBand" methodname="TopEdge_HalfBlock_HasAThinnerBand" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="1536137705" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000369" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1063" name="TopFace_IsUnchanged" fullname="CampfireFriends.Tests.EdgePlacementTests.TopFace_IsUnchanged" methodname="TopFace_IsUnchanged" classname="CampfireFriends.Tests.EdgePlacementTests" runstate="Runnable" seed="2092826403" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000300" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1065" name="FerryRideTests" fullname="CampfireFriends.Tests.FerryRideTests" classname="CampfireFriends.Tests.FerryRideTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001203" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1067" name="StartsAndStopsGently" fullname="CampfireFriends.Tests.FerryRideTests.StartsAndStopsGently" methodname="StartsAndStopsGently" classname="CampfireFriends.Tests.FerryRideTests" runstate="Runnable" seed="84256147" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000339" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1066" name="WaitsForTheBell_ThenCrossesAndStaysArrived" fullname="CampfireFriends.Tests.FerryRideTests.WaitsForTheBell_ThenCrossesAndStaysArrived" methodname="WaitsForTheBell_ThenCrossesAndStaysArrived" classname="CampfireFriends.Tests.FerryRideTests" runstate="Runnable" seed="1216522715" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000227" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1068" name="GameModeTests" fullname="CampfireFriends.Tests.GameModeTests" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002637" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1069" name="Creative_BuildsFree_AndSurvival_IsNotAvailableYet" fullname="CampfireFriends.Tests.GameModeTests.Creative_BuildsFree_AndSurvival_IsNotAvailableYet" methodname="Creative_BuildsFree_AndSurvival_IsNotAvailableYet" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" seed="154442949" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000368" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="FreeBuilding_PlacesWithNoStock_AndSpendsNothing" fullname="CampfireFriends.Tests.GameModeTests.FreeBuilding_PlacesWithNoStock_AndSpendsNothing" methodname="FreeBuilding_PlacesWithNoStock_AndSpendsNothing" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" seed="2092751458" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000258" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1072" name="FreeBuilding_RemovingRefundsNothing" fullname="CampfireFriends.Tests.GameModeTests.FreeBuilding_RemovingRefundsNothing" methodname="FreeBuilding_RemovingRefundsNothing" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" seed="664478736" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000367" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1073" name="FreeBuilding_StillEnforcesPlacementRules" fullname="CampfireFriends.Tests.GameModeTests.FreeBuilding_StillEnforcesPlacementRules" methodname="FreeBuilding_StillEnforcesPlacementRules" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" seed="1796071226" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000403" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1071" name="WithoutFreeBuilding_AnEmptyStockRefuses" fullname="CampfireFriends.Tests.GameModeTests.WithoutFreeBuilding_AnEmptyStockRefuses" methodname="WithoutFreeBuilding_AnEmptyStockRefuses" classname="CampfireFriends.Tests.GameModeTests" runstate="Runnable" seed="1212519911" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000308" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1074" name="MovePieceTests" fullname="CampfireFriends.Tests.MovePieceTests" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.005644" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1082" name="Move_AnnouncesRemoveThenAdd_WithTheSameId" fullname="CampfireFriends.Tests.MovePieceTests.Move_AnnouncesRemoveThenAdd_WithTheSameId" methodname="Move_AnnouncesRemoveThenAdd_WithTheSameId" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="2072462498" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001361" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1076" name="Move_ByOneCell_MayOverlapItsOwnOldCells" fullname="CampfireFriends.Tests.MovePieceTests.Move_ByOneCell_MayOverlapItsOwnOldCells" methodname="Move_ByOneCell_MayOverlapItsOwnOldCells" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="766519210" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000270" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1079" name="Move_IntoAnotherPiece_IsOccupied_AndChangesNothing" fullname="CampfireFriends.Tests.MovePieceTests.Move_IntoAnotherPiece_IsOccupied_AndChangesNothing" methodname="Move_IntoAnotherPiece_IsOccupied_AndChangesNothing" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="416669245" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000296" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1075" name="Move_KeepsIdOwnerAndHealth_FreesOldCells_CostsNothing" fullname="CampfireFriends.Tests.MovePieceTests.Move_KeepsIdOwnerAndHealth_FreesOldCells_CostsNothing" methodname="Move_KeepsIdOwnerAndHealth_FreesOldCells_CostsNothing" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="1955018366" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000403" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1081" name="Move_NonRemovablePiece_IsRefused" fullname="CampfireFriends.Tests.MovePieceTests.Move_NonRemovablePiece_IsRefused" methodname="Move_NonRemovablePiece_IsRefused" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="1675689373" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000249" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1077" name="Move_OntoItself_HasNoSupport" fullname="CampfireFriends.Tests.MovePieceTests.Move_OntoItself_HasNoSupport" methodname="Move_OntoItself_HasNoSupport" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="2068964377" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000314" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1080" name="Move_TopOfAStack_ToTheGround_IsAllowed" fullname="CampfireFriends.Tests.MovePieceTests.Move_TopOfAStack_ToTheGround_IsAllowed" methodname="Move_TopOfAStack_ToTheGround_IsAllowed" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="2042611300" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000264" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1078" name="Move_WhileSomethingRestsOnIt_IsRefused_AndChangesNothing" fullname="CampfireFriends.Tests.MovePieceTests.Move_WhileSomethingRestsOnIt_IsRefused_AndChangesNothing" methodname="Move_WhileSomethingRestsOnIt_IsRefused_AndChangesNothing" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="541549685" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000279" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1083" name="TurnInPlace_KeepsBaseAndCentre_AsCloseAsTheLatticeAllows" fullname="CampfireFriends.Tests.MovePieceTests.TurnInPlace_KeepsBaseAndCentre_AsCloseAsTheLatticeAllows" methodname="TurnInPlace_KeepsBaseAndCentre_AsCloseAsTheLatticeAllows" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="1110497756" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000451" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1084" name="TurnInPlace_SquarePiece_StaysPut" fullname="CampfireFriends.Tests.MovePieceTests.TurnInPlace_SquarePiece_StaysPut" methodname="TurnInPlace_SquarePiece_StaysPut" classname="CampfireFriends.Tests.MovePieceTests" runstate="Runnable" seed="1255819422" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000308" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1085" name="Night01Tests" fullname="CampfireFriends.Tests.Night01Tests" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.007960" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1092" name="Doorway_CountsAsSecured_WhenCovered_HoweverItWasBoarded" fullname="CampfireFriends.Tests.Night01Tests.Doorway_CountsAsSecured_WhenCovered_HoweverItWasBoarded" methodname="Doorway_CountsAsSecured_WhenCovered_HoweverItWasBoarded" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="887544688" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000605" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1093" name="Doorway_HalfBoarded_IsHalfCovered" fullname="CampfireFriends.Tests.Night01Tests.Doorway_HalfBoarded_IsHalfCovered" methodname="Doorway_HalfBoarded_IsHalfCovered" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="2089043262" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000165" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1087" name="LinesNeverOverlap_AndEachPlaysOnce" fullname="CampfireFriends.Tests.Night01Tests.LinesNeverOverlap_AndEachPlaysOnce" methodname="LinesNeverOverlap_AndEachPlaysOnce" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="1993208790" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002934" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1090" name="ReturningEarly_BeforeTheImpact_DoesNotStartTheShiftLog" fullname="CampfireFriends.Tests.Night01Tests.ReturningEarly_BeforeTheImpact_DoesNotStartTheShiftLog" methodname="ReturningEarly_BeforeTheImpact_DoesNotStartTheShiftLog" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="556120274" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000194" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1089" name="StalledAtTheShed_GetsOneHint_OnlyIfStillStuck" fullname="CampfireFriends.Tests.Night01Tests.StalledAtTheShed_GetsOneHint_OnlyIfStillStuck" methodname="StalledAtTheShed_GetsOneHint_OnlyIfStillStuck" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="1914028119" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001140" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1091" name="Sync_AnnouncesNewFlagsOnly" fullname="CampfireFriends.Tests.Night01Tests.Sync_AnnouncesNewFlagsOnly" methodname="Sync_AnnouncesNewFlagsOnly" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="1525682253" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000479" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1088" name="TheRadio_StaysQuiet_UntilSomeoneTakesAWalkie" fullname="CampfireFriends.Tests.Night01Tests.TheRadio_StaysQuiet_UntilSomeoneTakesAWalkie" methodname="TheRadio_StaysQuiet_UntilSomeoneTakesAWalkie" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="1163564270" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000439" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1086" name="TheWholeNight_RunsInOrder_AndCompletes" fullname="CampfireFriends.Tests.Night01Tests.TheWholeNight_RunsInOrder_AndCompletes" methodname="TheWholeNight_RunsInOrder_AndCompletes" classname="CampfireFriends.Tests.Night01Tests" runstate="Runnable" seed="825738241" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000752" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1094" name="PieceConnectionTests" fullname="CampfireFriends.Tests.PieceConnectionTests" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.003619" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1097" name="Crossing_JoinsAllFourSides" fullname="CampfireFriends.Tests.PieceConnectionTests.Crossing_JoinsAllFourSides" methodname="Crossing_JoinsAllFourSides" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1927833606" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001311" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1098" name="FenceRunningPastTheSide_DoesNotJoin" fullname="CampfireFriends.Tests.PieceConnectionTests.FenceRunningPastTheSide_DoesNotJoin" methodname="FenceRunningPastTheSide_DoesNotJoin" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1214880352" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000246" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="LCorner_JoinsBothFences" fullname="CampfireFriends.Tests.PieceConnectionTests.LCorner_JoinsBothFences" methodname="LCorner_JoinsBothFences" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1718524007" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1095" name="LoneCorner_JoinsNothing" fullname="CampfireFriends.Tests.PieceConnectionTests.LoneCorner_JoinsNothing" methodname="LoneCorner_JoinsNothing" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1447124559" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000189" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="OtherGroups_DoNotJoin_AndRemovalUnjoins" fullname="CampfireFriends.Tests.PieceConnectionTests.OtherGroups_DoNotJoin_AndRemovalUnjoins" methodname="OtherGroups_DoNotJoin_AndRemovalUnjoins" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1814634378" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000242" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1099" name="TwoCorners_JoinEachOther" fullname="CampfireFriends.Tests.PieceConnectionTests.TwoCorners_JoinEachOther" methodname="TwoCorners_JoinEachOther" classname="CampfireFriends.Tests.PieceConnectionTests" runstate="Runnable" seed="1768566355" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000207" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1101" name="PlacementSolverTests" fullname="CampfireFriends.Tests.PlacementSolverTests" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" testcasecount="43" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.017931" total="43" passed="43" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1140" name="AimFarFromAnyEdge_SlidesFreelyOnLattice_NoTeleport" fullname="CampfireFriends.Tests.PlacementSolverTests.AimFarFromAnyEdge_SlidesFreelyOnLattice_NoTeleport" methodname="AimFarFromAnyEdge_SlidesFreelyOnLattice_NoTeleport" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="57237324" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000554" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1139" name="AimSlightlyOffEdge_WithinMagnet_StillSnapsToEdge" fullname="CampfireFriends.Tests.PlacementSolverTests.AimSlightlyOffEdge_WithinMagnet_StillSnapsToEdge" methodname="AimSlightlyOffEdge_WithinMagnet_StillSnapsToEdge" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="756562660" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000380" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1126" name="Contact_IsFlush_AndSharesFace" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" testcasecount="24" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.007447" total="24" passed="24" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1102" name="Contact_IsFlush_AndSharesFace((1, 0, 0), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((1, 0, 0), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1771336368" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001660" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="Contact_IsFlush_AndSharesFace((1, 0, 0), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((1, 0, 0), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1022504861" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000219" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1104" name="Contact_IsFlush_AndSharesFace((1, 0, 0), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((1, 0, 0), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="542686400" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000165" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1105" name="Contact_IsFlush_AndSharesFace((1, 0, 0), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((1, 0, 0), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="538530168" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1106" name="Contact_IsFlush_AndSharesFace((-1, 0, 0), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((-1, 0, 0), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1392033378" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000166" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1107" name="Contact_IsFlush_AndSharesFace((-1, 0, 0), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((-1, 0, 0), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1532805140" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000165" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="Contact_IsFlush_AndSharesFace((-1, 0, 0), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((-1, 0, 0), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1730547719" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000151" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="Contact_IsFlush_AndSharesFace((-1, 0, 0), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((-1, 0, 0), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1817276116" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="Contact_IsFlush_AndSharesFace((0, 1, 0), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 1, 0), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1903782221" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="Contact_IsFlush_AndSharesFace((0, 1, 0), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 1, 0), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="391271576" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000151" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1112" name="Contact_IsFlush_AndSharesFace((0, 1, 0), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 1, 0), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1870416364" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000155" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="Contact_IsFlush_AndSharesFace((0, 1, 0), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 1, 0), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1361735218" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="Contact_IsFlush_AndSharesFace((0, -1, 0), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, -1, 0), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1216280619" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000186" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="Contact_IsFlush_AndSharesFace((0, -1, 0), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, -1, 0), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="75390707" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1116" name="Contact_IsFlush_AndSharesFace((0, -1, 0), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, -1, 0), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1769248427" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1117" name="Contact_IsFlush_AndSharesFace((0, -1, 0), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, -1, 0), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1799616429" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1118" name="Contact_IsFlush_AndSharesFace((0, 0, 1), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, 1), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1118322965" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000153" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1119" name="Contact_IsFlush_AndSharesFace((0, 0, 1), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, 1), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="781392125" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000155" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1120" name="Contact_IsFlush_AndSharesFace((0, 0, 1), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, 1), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1819752234" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000153" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1121" name="Contact_IsFlush_AndSharesFace((0, 0, 1), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, 1), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="2011380337" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000181" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1122" name="Contact_IsFlush_AndSharesFace((0, 0, -1), R0)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, -1), R0)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="310448220" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000155" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1123" name="Contact_IsFlush_AndSharesFace((0, 0, -1), R90)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, -1), R90)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1064653599" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1124" name="Contact_IsFlush_AndSharesFace((0, 0, -1), R180)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, -1), R180)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="413990557" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1125" name="Contact_IsFlush_AndSharesFace((0, 0, -1), R270)" fullname="CampfireFriends.Tests.PlacementSolverTests.Contact_IsFlush_AndSharesFace((0, 0, -1), R270)" methodname="Contact_IsFlush_AndSharesFace" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1445924610" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000155" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1137" name="Corner_AimNearFarEnd_PicksEdgeToEdge_NotCentre" fullname="CampfireFriends.Tests.PlacementSolverTests.Corner_AimNearFarEnd_PicksEdgeToEdge_NotCentre" methodname="Corner_AimNearFarEnd_PicksEdgeToEdge_NotCentre" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="2056994608" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000446" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1138" name="Corner_AimNearNearEnd_PicksEdgeToEdge" fullname="CampfireFriends.Tests.PlacementSolverTests.Corner_AimNearNearEnd_PicksEdgeToEdge" methodname="Corner_AimNearNearEnd_PicksEdgeToEdge" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1628779287" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000289" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1127" name="Ground_CentresOnAim_AndSitsOnLattice" fullname="CampfireFriends.Tests.PlacementSolverTests.Ground_CentresOnAim_AndSitsOnLattice" methodname="Ground_CentresOnAim_AndSitsOnLattice" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1050840717" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000487" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1128" name="Ground_SlightlyUneven_RoundsToNearestLevel" fullname="CampfireFriends.Tests.PlacementSolverTests.Ground_SlightlyUneven_RoundsToNearestLevel" methodname="Ground_SlightlyUneven_RoundsToNearestLevel" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="154653747" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000284" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1146" name="NothingAimed_HasNoPose" fullname="CampfireFriends.Tests.PlacementSolverTests.NothingAimed_HasNoPose" methodname="NothingAimed_HasNoPose" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1372639831" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000274" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1142" name="RoofBesideRoof_ExtendsWithoutHalfStep" fullname="CampfireFriends.Tests.PlacementSolverTests.RoofBesideRoof_ExtendsWithoutHalfStep" methodname="RoofBesideRoof_ExtendsWithoutHalfStep" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1590238383" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000305" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1141" name="RoofOnWallTop_RestsOnTop" fullname="CampfireFriends.Tests.PlacementSolverTests.RoofOnWallTop_RestsOnTop" methodname="RoofOnWallTop_RestsOnTop" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="219220607" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000324" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1144" name="Rotating_ReSolvesFromTheSameAim" fullname="CampfireFriends.Tests.PlacementSolverTests.Rotating_ReSolvesFromTheSameAim" methodname="Rotating_ReSolvesFromTheSameAim" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="313680784" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000343" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1145" name="SceneryWall_OffLattice_LeavesGapRatherThanPenetrating" fullname="CampfireFriends.Tests.PlacementSolverTests.SceneryWall_OffLattice_LeavesGapRatherThanPenetrating" methodname="SceneryWall_OffLattice_LeavesGapRatherThanPenetrating" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="317779105" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000771" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1136" name="SideHit_VerticalIntent" fullname="CampfireFriends.Tests.PlacementSolverTests.SideHit_VerticalIntent" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.001939" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1133" name="SideHit_Bottom_AlignsBottoms" fullname="CampfireFriends.Tests.PlacementSolverTests.SideHit_Bottom_AlignsBottoms" methodname="SideHit_VerticalIntent" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="552477660" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000609" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1134" name="SideHit_Middle_AlignsCentres" fullname="CampfireFriends.Tests.PlacementSolverTests.SideHit_Middle_AlignsCentres" methodname="SideHit_VerticalIntent" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="218565175" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000228" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1135" name="SideHit_Top_AlignsTops" fullname="CampfireFriends.Tests.PlacementSolverTests.SideHit_Top_AlignsTops" methodname="SideHit_VerticalIntent" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="765342490" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000185" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1143" name="UnequalSizes_StayOnTheSameLattice" fullname="CampfireFriends.Tests.PlacementSolverTests.UnequalSizes_StayOnTheSameLattice" methodname="UnequalSizes_StayOnTheSameLattice" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1742060661" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000395" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1130" name="WallBesideWall_MinusX_LinesUpEdges" fullname="CampfireFriends.Tests.PlacementSolverTests.WallBesideWall_MinusX_LinesUpEdges" methodname="WallBesideWall_MinusX_LinesUpEdges" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1201807161" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000380" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1129" name="WallBesideWall_PlusX_LinesUpEdges" fullname="CampfireFriends.Tests.PlacementSolverTests.WallBesideWall_PlusX_LinesUpEdges" methodname="WallBesideWall_PlusX_LinesUpEdges" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="148215852" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000294" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1131" name="WallInFrontOfWall_PlusZ_LinesUpEdges" fullname="CampfireFriends.Tests.PlacementSolverTests.WallInFrontOfWall_PlusZ_LinesUpEdges" methodname="WallInFrontOfWall_PlusZ_LinesUpEdges" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="2000561451" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000288" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1132" name="WallOnWallTop_StacksExactly" fullname="CampfireFriends.Tests.PlacementSolverTests.WallOnWallTop_StacksExactly" methodname="WallOnWallTop_StacksExactly" classname="CampfireFriends.Tests.PlacementSolverTests" runstate="Runnable" seed="1620604251" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000269" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1147" name="PlacementValidationTests" fullname="CampfireFriends.Tests.PlacementValidationTests" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.007044" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1148" name="FirstPieceOnGround_IsValid" fullname="CampfireFriends.Tests.PlacementValidationTests.FirstPieceOnGround_IsValid" methodname="FirstPieceOnGround_IsValid" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="724384193" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000319" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1151" name="FloatingInEmptyAir_IsUnsupported" fullname="CampfireFriends.Tests.PlacementValidationTests.FloatingInEmptyAir_IsUnsupported" methodname="FloatingInEmptyAir_IsUnsupported" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="412191234" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000226" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1153" name="GroundRule_RejectsRestingOnAPiece" fullname="CampfireFriends.Tests.PlacementValidationTests.GroundRule_RejectsRestingOnAPiece" methodname="GroundRule_RejectsRestingOnAPiece" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1735422947" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000265" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1149" name="IntersectingOccupiedCells_IsOccupied" fullname="CampfireFriends.Tests.PlacementValidationTests.IntersectingOccupiedCells_IsOccupied" methodname="IntersectingOccupiedCells_IsOccupied" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="324300600" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000242" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1160" name="NotEnoughBoards_IsReportedBeforeCommit" fullname="CampfireFriends.Tests.PlacementValidationTests.NotEnoughBoards_IsReportedBeforeCommit" methodname="NotEnoughBoards_IsReportedBeforeCommit" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="39803198" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000317" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1163" name="PreviewWithoutStock_SkipsCostCheck" fullname="CampfireFriends.Tests.PlacementValidationTests.PreviewWithoutStock_SkipsCostCheck" methodname="PreviewWithoutStock_SkipsCostCheck" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1820349212" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000304" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1158" name="RoofAtDifferentHeight_DoesNotJoinTheRun" fullname="CampfireFriends.Tests.PlacementValidationTests.RoofAtDifferentHeight_DoesNotJoinTheRun" methodname="RoofAtDifferentHeight_DoesNotJoinTheRun" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1807835805" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000247" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1154" name="RoofOnGround_IsUnsupported" fullname="CampfireFriends.Tests.PlacementValidationTests.RoofOnGround_IsUnsupported" methodname="RoofOnGround_IsUnsupported" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="647918455" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000211" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1155" name="RoofOnWall_IsSupported" fullname="CampfireFriends.Tests.PlacementValidationTests.RoofOnWall_IsSupported" methodname="RoofOnWall_IsSupported" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="809070700" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000227" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1156" name="RoofRun_IsHeldUpByOneSupportedPanel" fullname="CampfireFriends.Tests.PlacementValidationTests.RoofRun_IsHeldUpByOneSupportedPanel" methodname="RoofRun_IsHeldUpByOneSupportedPanel" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="205605007" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000363" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1157" name="RoofTouchingOnlyAtACorner_IsUnsupported" fullname="CampfireFriends.Tests.PlacementValidationTests.RoofTouchingOnlyAtACorner_IsUnsupported" methodname="RoofTouchingOnlyAtACorner_IsUnsupported" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="750773080" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000285" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1161" name="Scenery_InTheWay_IsObstructed" fullname="CampfireFriends.Tests.PlacementValidationTests.Scenery_InTheWay_IsObstructed" methodname="Scenery_InTheWay_IsObstructed" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1714291554" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000935" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1150" name="SharingOnlyAFace_IsNotOverlap" fullname="CampfireFriends.Tests.PlacementValidationTests.SharingOnlyAFace_IsNotOverlap" methodname="SharingOnlyAFace_IsNotOverlap" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1848220032" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000274" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1159" name="SideAttach_HangsOffAPieceButNotOffNothing" fullname="CampfireFriends.Tests.PlacementValidationTests.SideAttach_HangsOffAPieceButNotOffNothing" methodname="SideAttach_HangsOffAPieceButNotOffNothing" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1928503102" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000273" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1152" name="Stack_NeedsSomethingUnderEveryBottomCell" fullname="CampfireFriends.Tests.PlacementValidationTests.Stack_NeedsSomethingUnderEveryBottomCell" methodname="Stack_NeedsSomethingUnderEveryBottomCell" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="1907472532" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000274" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1162" name="UnknownPiece_IsRejected" fullname="CampfireFriends.Tests.PlacementValidationTests.UnknownPiece_IsRejected" methodname="UnknownPiece_IsRejected" classname="CampfireFriends.Tests.PlacementValidationTests" runstate="Runnable" seed="895218660" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000211" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1164" name="ShiftClockTests" fullname="CampfireFriends.Tests.ShiftClockTests" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.007598" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1169" name="Advance_AnnouncesEveryPhasePassed_InOrder" fullname="CampfireFriends.Tests.ShiftClockTests.Advance_AnnouncesEveryPhasePassed_InOrder" methodname="Advance_AnnouncesEveryPhasePassed_InOrder" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="614033042" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002224" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1170" name="AfterMorning_TheNextNightBeginsAtPrep" fullname="CampfireFriends.Tests.ShiftClockTests.AfterMorning_TheNextNightBeginsAtPrep" methodname="AfterMorning_TheNextNightBeginsAtPrep" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="90218798" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000268" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1174" name="AnEmptySchedule_NeverAdvances" fullname="CampfireFriends.Tests.ShiftClockTests.AnEmptySchedule_NeverAdvances" methodname="AnEmptySchedule_NeverAdvances" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="848642681" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000155" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1165" name="DefaultShift_NightLastsTwiceAsLongAsDay" fullname="CampfireFriends.Tests.ShiftClockTests.DefaultShift_NightLastsTwiceAsLongAsDay" methodname="DefaultShift_NightLastsTwiceAsLongAsDay" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="453626000" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000316" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1167" name="Hours_RunThroughThePhase" fullname="CampfireFriends.Tests.ShiftClockTests.Hours_RunThroughThePhase" methodname="Hours_RunThroughThePhase" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="786788176" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000330" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1168" name="Hours_WrapPastMidnight_DuringTheWatch" fullname="CampfireFriends.Tests.ShiftClockTests.Hours_WrapPastMidnight_DuringTheWatch" methodname="Hours_WrapPastMidnight_DuringTheWatch" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="1335839506" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000109" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1177" name="Moon_IsUpOnlyAtNight" fullname="CampfireFriends.Tests.ShiftClockTests.Moon_IsUpOnlyAtNight" methodname="Moon_IsUpOnlyAtNight" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="1895009960" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000851" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1171" name="SkipPhase_JumpsToTheStartOfTheNext" fullname="CampfireFriends.Tests.ShiftClockTests.SkipPhase_JumpsToTheStartOfTheNext" methodname="SkipPhase_JumpsToTheStartOfTheNext" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="885849370" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000254" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1166" name="StartsAtPrepOfNightOne" fullname="CampfireFriends.Tests.ShiftClockTests.StartsAtPrepOfNightOne" methodname="StartsAtPrepOfNightOne" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="978660482" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000303" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1176" name="Sun_RisesEast_PeaksSouth_SetsWest_AndIsDownAtMidnight" fullname="CampfireFriends.Tests.ShiftClockTests.Sun_RisesEast_PeaksSouth_SetsWest_AndIsDownAtMidnight" methodname="Sun_RisesEast_PeaksSouth_SetsWest_AndIsDownAtMidnight" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="1448254898" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000247" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1172" name="Sync_TakesTheAuthoritysTime_AndAnnouncesOneChange" fullname="CampfireFriends.Tests.ShiftClockTests.Sync_TakesTheAuthoritysTime_AndAnnouncesOneChange" methodname="Sync_TakesTheAuthoritysTime_AndAnnouncesOneChange" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="562047266" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000282" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1173" name="Sync_WithinTheSamePhase_AnnouncesNothing" fullname="CampfireFriends.Tests.ShiftClockTests.Sync_WithinTheSamePhase_AnnouncesNothing" methodname="Sync_WithinTheSamePhase_AnnouncesNothing" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="616196505" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000265" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1175" name="ZeroLengthPhases_ArePassedThrough_ButStillAnnounced" fullname="CampfireFriends.Tests.ShiftClockTests.ZeroLengthPhases_ArePassedThrough_ButStillAnnounced" methodname="ZeroLengthPhases_ArePassedThrough_ButStillAnnounced" classname="CampfireFriends.Tests.ShiftClockTests" runstate="Runnable" seed="610418362" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000176" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1178" name="SuppliesTests" fullname="CampfireFriends.Tests.SuppliesTests" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.002319" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1181" name="CanAfford_SumsDuplicateEntries" fullname="CampfireFriends.Tests.SuppliesTests.CanAfford_SumsDuplicateEntries" methodname="CanAfford_SumsDuplicateEntries" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" seed="1885837441" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000448" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1183" name="SupplyNode_RaisesDepletedOnce" fullname="CampfireFriends.Tests.SuppliesTests.SupplyNode_RaisesDepletedOnce" methodname="SupplyNode_RaisesDepletedOnce" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" seed="1369733417" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000379" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1182" name="SupplyNode_TwoWithdrawals_NeverExceedRemaining" fullname="CampfireFriends.Tests.SuppliesTests.SupplyNode_TwoWithdrawals_NeverExceedRemaining" methodname="SupplyNode_TwoWithdrawals_NeverExceedRemaining" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" seed="1288543225" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000176" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1179" name="TrySpend_IsAllOrNothing_AcrossResourceTypes" fullname="CampfireFriends.Tests.SuppliesTests.TrySpend_IsAllOrNothing_AcrossResourceTypes" methodname="TrySpend_IsAllOrNothing_AcrossResourceTypes" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" seed="622635872" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000172" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1180" name="TrySpend_NeverGoesNegative" fullname="CampfireFriends.Tests.SuppliesTests.TrySpend_NeverGoesNegative" methodname="TrySpend_NeverGoesNegative" classname="CampfireFriends.Tests.SuppliesTests" runstate="Runnable" seed="446518214" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000145" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1184" name="UsePieceTests" fullname="CampfireFriends.Tests.UsePieceTests" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.003105" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1189" name="Move_KeepsALightSwitchedOn" fullname="CampfireFriends.Tests.UsePieceTests.Move_KeepsALightSwitchedOn" methodname="Move_KeepsALightSwitchedOn" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="904679585" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000580" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1190" name="SetOn_ToTheSameState_RaisesNothing" fullname="CampfireFriends.Tests.UsePieceTests.SetOn_ToTheSameState_RaisesNothing" methodname="SetOn_ToTheSameState_RaisesNothing" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="1073467595" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000347" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1187" name="Use_PieceWithoutAUse_IsNotUsable_AndChangesNothing" fullname="CampfireFriends.Tests.UsePieceTests.Use_PieceWithoutAUse_IsNotUsable_AndChangesNothing" methodname="Use_PieceWithoutAUse_IsNotUsable_AndChangesNothing" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="439705017" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000248" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1186" name="Use_RaisesStateChanged_NotRemovedOrAdded" fullname="CampfireFriends.Tests.UsePieceTests.Use_RaisesStateChanged_NotRemovedOrAdded" methodname="Use_RaisesStateChanged_NotRemovedOrAdded" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="2095709184" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000406" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1185" name="Use_TogglePiece_SwitchesOnThenOff_AndCostsNothing" fullname="CampfireFriends.Tests.UsePieceTests.Use_TogglePiece_SwitchesOnThenOff_AndCostsNothing" methodname="Use_TogglePiece_SwitchesOnThenOff_AndCostsNothing" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="1651932053" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000313" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1188" name="Use_UnknownPiece_IsRefused" fullname="CampfireFriends.Tests.UsePieceTests.Use_UnknownPiece_IsRefused" methodname="Use_UnknownPiece_IsRefused" classname="CampfireFriends.Tests.UsePieceTests" runstate="Runnable" seed="846745079" result="Passed" start-time="2026-10-30 16:26:42Z" end-time="2026-10-30 16:26:42Z" duration="0.000204" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/james/AppData/LocalLow/TitanARX/Camp Fire Friends\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

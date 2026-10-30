@@ -70,3 +70,5 @@ MonoBehaviour:
   _Rotation: 0
   _PlacedBy: 0
   _Health: 0
+  _On:
+    _value: 0

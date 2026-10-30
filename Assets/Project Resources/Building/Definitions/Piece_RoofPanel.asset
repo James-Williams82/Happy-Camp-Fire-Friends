@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: roof_panel
   DisplayName: Roof Panel
+  Hint: 
   Footprint: {x: 2, y: 1, z: 2}
   Support: 2
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 1
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 8090799669979961962, guid: ffa8b0ca4cc564040a07e533a4ae61f9, type: 3}

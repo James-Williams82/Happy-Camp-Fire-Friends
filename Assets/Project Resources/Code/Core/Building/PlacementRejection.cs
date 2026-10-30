@@ -13,5 +13,7 @@ namespace CampfireFriends.Building
         NotRemovable,
         UnknownPlacedPiece,
         HasDependents,
+        NotUsable,
+        OutOfReach,
     }
 }

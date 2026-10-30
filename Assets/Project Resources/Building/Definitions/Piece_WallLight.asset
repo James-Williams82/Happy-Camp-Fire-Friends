@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417b647804ced7d428cdc19641c9373c, type: 3}
+  m_Name: Piece_WallLight
+  m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
+  Id: wall_light
+  DisplayName: Wall Light
+  Hint: 
+  Footprint: {x: 1, y: 1, z: 1}
+  Support: 3
+  Cost:
+  - Type: 0
+    Amount: 1
+  Removable: 1
+  RefundOnRemove: 1
+  MaxHealth: 100
+  Size: 0
+  Use: 1
+  UseRange: 2.5
+  ConnectGroup: 
+  Prefab: {fileID: 4844574543596661417, guid: ab2d9829be729734cb8059c80d532959, type: 3}

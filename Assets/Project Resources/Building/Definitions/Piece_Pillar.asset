@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: pillar
   DisplayName: Pillar
+  Hint: 
   Footprint: {x: 1, y: 4, z: 1}
   Support: 0
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 0
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 8822485287009710064, guid: abb81ffd4f6d3c24eb4a1ede0ab766cf, type: 3}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8c22e44fac0dd5f49b1e7afc54c6aca7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 343194
+  packageName: Stylized Outdoor Camping Pack
+  packageVersion: 1.0
+  assetPath: Assets/StylizedOutdoorCampingPack/Materials/M_Compass_Opacity.mat
+  uploadId: 825776

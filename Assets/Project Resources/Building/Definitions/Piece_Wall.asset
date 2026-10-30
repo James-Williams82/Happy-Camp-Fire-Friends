@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: wall
   DisplayName: Wall
+  Hint: 
   Footprint: {x: 2, y: 4, z: 1}
   Support: 0
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 2
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 6623550647514443701, guid: 7df423e7567e4c1439c02a56de7007f9, type: 3}

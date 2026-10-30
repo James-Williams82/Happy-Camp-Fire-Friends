@@ -19,6 +19,9 @@ namespace CampfireFriends.Building
         public event Action<PlacedPiece> Added;
         public event Action<PlacedPiece> Removed;
 
+        /// <summary>A placed piece's state changed in place (switched on or off); it didn't move.</summary>
+        public event Action<PlacedPiece> StateChanged;
+
         public IEnumerable<PlacedPiece> Pieces => _pieces.Values;
         public int Count => _pieces.Count;
 
@@ -65,6 +68,17 @@ namespace CampfireFriends.Building
             foreach (var cell in piece.Bounds.Cells()) _cells.Remove(cell);
             _pieces.Remove(id);
             Removed?.Invoke(piece);
+            return true;
+        }
+
+        /// <summary>Switches a piece on or off. Returns false for an unknown piece; no event if nothing changes.</summary>
+        public bool SetOn(int id, bool on)
+        {
+            if (!_pieces.TryGetValue(id, out var piece)) return false;
+            if (piece.On == on) return true;
+
+            piece.On = on;
+            StateChanged?.Invoke(piece);
             return true;
         }
 

@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Avatar Setup.unity
     guid: 4e29258160c37a0459af9803b4921778
+  - enabled: 1
+    path: Assets/Scenes/CampAshwood.unity
+    guid: 175085b28a266c9488ad8c181841247d
+  - enabled: 1
+    path: Assets/Scenes/BuildSandbox.unity
+    guid: 703a046c2e20a744395ca0ed2c21f276
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 435cfe1835bf9154faa117c3349db852,
       type: 2}

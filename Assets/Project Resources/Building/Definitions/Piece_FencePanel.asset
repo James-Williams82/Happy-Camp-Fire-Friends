@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: fence_panel
   DisplayName: Fence Panel
+  Hint: 
   Footprint: {x: 4, y: 3, z: 1}
   Support: 1
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 1
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: fence
   Prefab: {fileID: 7249187389341691852, guid: 141977a85381ec44d90f7ec9722f310b, type: 3}

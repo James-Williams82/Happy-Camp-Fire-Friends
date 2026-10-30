@@ -17,6 +17,9 @@ namespace CampfireFriends.Construction
         BuildWorld World { get; }
         PlacementValidator Validator { get; }
         IStockView Stock { get; }
+
+        /// <summary>The game mode makes pieces free (Creative): previews skip the cost check.</summary>
+        bool FreeBuilding { get; }
     }
 
     /// <summary>The write side: requests the authority accepts or refuses. Nothing changes locally until it does.</summary>
@@ -27,6 +30,9 @@ namespace CampfireFriends.Construction
 
         /// <summary>Moves or turns a placed piece. Free, and refused while anything rests on it.</summary>
         void RequestMove(int placedId, Vector3Int min, GridRotation rotation);
+
+        /// <summary>Uses a placed piece (switches a light). Free; reach is checked by the requester.</summary>
+        void RequestUse(int placedId);
 
         /// <summary>Raised on the requesting machine when the authority refuses a request.</summary>
         event Action<PlacementRejection> RequestRejected;

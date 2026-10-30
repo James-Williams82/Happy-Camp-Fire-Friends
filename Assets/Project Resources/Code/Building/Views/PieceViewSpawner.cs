@@ -6,7 +6,7 @@ namespace CampfireFriends.Construction
 {
     /// <summary>
     /// Keeps one <see cref="PieceView"/> per piece in a <see cref="BuildWorld"/>: spawns on Added,
-    /// destroys on Removed. Used where nothing else owns the views (the offline sandbox).
+    /// destroys on Removed, and shows state changes. Used where nothing else owns the views (the offline sandbox).
     /// </summary>
     public sealed class PieceViewSpawner
     {
@@ -25,12 +25,14 @@ namespace CampfireFriends.Construction
 
             _world.Added += Spawn;
             _world.Removed += Despawn;
+            _world.StateChanged += ShowState;
         }
 
         public void Dispose()
         {
             _world.Added -= Spawn;
             _world.Removed -= Despawn;
+            _world.StateChanged -= ShowState;
             foreach (var view in _views.Values)
             {
                 if (view != null) Object.Destroy(view.gameObject);
@@ -65,6 +67,11 @@ namespace CampfireFriends.Construction
 
             view.BindPlaced(piece, definition, _grid);
             _views[piece.Id] = view;
+        }
+
+        private void ShowState(PlacedPiece piece)
+        {
+            if (_views.TryGetValue(piece.Id, out var view) && view != null) view.ShowState(piece.On);
         }
 
         private void Despawn(PlacedPiece piece)

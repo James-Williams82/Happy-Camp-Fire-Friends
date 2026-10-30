@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CampfireFriends.Building;
 using CampfireFriends.Network;
 using CampfireFriends.Supplies;
@@ -10,6 +11,7 @@ using Oculus.Interaction;
 using Oculus.Interaction.Input;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Events;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,9 +44,32 @@ namespace CampfireFriends.Construction.Editor
         // The authored world-space piece menu (Interaction SDK UI set). Its buttons become palette slots.
         private const string MenuPrefabPath = "Assets/UI/PRefabs/build-menu.prefab";
 
+        // Building sounds: the clips folder and the sound set filled from it by file name.
+        private const string SoundsFolder = "Assets/Audio/Building";
+        private const string SoundSetPath = Root + "/Audio/BuildSounds.asset";
+        private static readonly Regex SoundName =
+            new Regex(@"^sfx_build_(?<action>[a-z_]+?)(?:_(?<size>small|medium|large|all))?_(?<n>\d+)$");
+
         // The menu beside a selected piece, generated from the same Interaction SDK UI set.
         private const string ModifyMenuPrefabPath = "Assets/UI/PRefabs/piece-modify-menu.prefab";
         private static readonly string[] ModifyActions = { "Rotate 90°", "Reposition", "Delete", "Close" };
+        private static readonly string[] ModifyHints =
+        {
+            "Turns it a quarter turn. A does the same.",
+            "Aim where it should go, then pull the trigger.",
+            "Takes the piece down.",
+            "Done with this piece. B does the same.",
+        };
+
+        // Networked play: the host/join menu and the player avatar everyone else sees.
+        private const string SessionMenuPrefabPath = "Assets/UI/PRefabs/session-menu.prefab";
+        private static readonly string[] SessionActions = { "Host", "Join", "Leave", "Close" };
+        private static readonly string[] SessionModes = { "Creative", "Survival" };
+        private const string NetworkPrefabs = "Assets/Project Resources/Network/Prefabs";
+        private const string AvatarPath = NetworkPrefabs + "/PlayerAvatar.prefab";
+
+        // Interaction SDK UI set: Tooltip/Tooltip. One per menu, shared by its buttons.
+        private const string UiTooltipGuid = "51ba61fa774ccd14fb1f3743d17109a4";
 
         // Interaction SDK UI set: Backplate/EmptyUIBackplateWithCanvas and Button/PrimaryButton_IconAndLabel_UnityUIButton.
         private const string UiBackplateGuid = "6b196de96e7d16b4297c1980179ae439";
@@ -74,7 +99,22 @@ namespace CampfireFriends.Construction.Editor
             public Vector3Int Footprint;
             public SupportRule Support;
             public int Boards;
+            public PieceSize Size = PieceSize.Medium;
+            public PieceUse Use = PieceUse.None;
             public Box[] Boxes;
+
+            /// <summary>Where a light's bulb and point light sit, for light pieces; null for none.</summary>
+            public Vector3? Bulb;
+
+            /// <summary>Pieces in the same group join up where they meet end-on.</summary>
+            public string ConnectGroup = "";
+            public string Hint = "";
+
+            /// <summary>Parts shown toward joined neighbours, in order +X, -X, +Z, -Z; null for none.</summary>
+            public Box[] Joins;
+
+            /// <summary>Players can grip it to climb (ladders, climbing walls).</summary>
+            public bool Climb;
         }
 
         /// <summary>Box filling the whole footprint, for simple pieces. Pivot is bottom-centre.</summary>
@@ -99,8 +139,8 @@ namespace CampfireFriends.Construction.Editor
             return new[]
             {
                 new PieceSpec { Id = "block", Name = "Block", Footprint = block, Support = SupportRule.Stack, Boards = 2, Boxes = new[] { Solid(block) } },
-                new PieceSpec { Id = "half_block", Name = "Half Block", Footprint = halfBlock, Support = SupportRule.Stack, Boards = 1, Boxes = new[] { Solid(halfBlock, "LightWood") } },
-                new PieceSpec { Id = "wall", Name = "Wall", Footprint = wall, Support = SupportRule.Stack, Boards = 3, Boxes = new[] { Solid(wall, "LightWood") } },
+                new PieceSpec { Id = "half_block", Name = "Half Block", Footprint = halfBlock, Support = SupportRule.Stack, Boards = 1, Size = PieceSize.Small, Boxes = new[] { Solid(halfBlock, "LightWood") } },
+                new PieceSpec { Id = "wall", Name = "Wall", Footprint = wall, Support = SupportRule.Stack, Boards = 3, Size = PieceSize.Large, Boxes = new[] { Solid(wall, "LightWood") } },
                 new PieceSpec { Id = "floor", Name = "Floor", Footprint = floor, Support = SupportRule.Stack, Boards = 2, Boxes = new[] { Solid(floor, "DarkWood") } },
                 new PieceSpec
                 {
@@ -109,12 +149,12 @@ namespace CampfireFriends.Construction.Editor
                 },
                 new PieceSpec
                 {
-                    Id = "beam", Name = "Beam", Footprint = beam, Support = SupportRule.SideAttach, Boards = 2,
+                    Id = "beam", Name = "Beam", Footprint = beam, Support = SupportRule.SideAttach, Boards = 2, Size = PieceSize.Small,
                     Boxes = new[] { new Box(new Vector3(0f, 0.25f, 0f), new Vector3(1.5f, 0.3f, 0.3f), "DarkWood") },
                 },
                 new PieceSpec
                 {
-                    Id = "fence_panel", Name = "Fence Panel", Footprint = fence, Support = SupportRule.Ground, Boards = 2,
+                    Id = "fence_panel", Name = "Fence Panel", Footprint = fence, Support = SupportRule.Ground, Boards = 2, ConnectGroup = "fence",
                     Boxes = new[]
                     {
                         new Box(new Vector3(0f, 0.75f, 0f), new Vector3(1.8f, 1.2f, 0.06f), "LightWood"),
@@ -122,8 +162,76 @@ namespace CampfireFriends.Construction.Editor
                         new Box(new Vector3(0.95f, 0.75f, 0f), new Vector3(0.1f, 1.5f, 0.1f), "DarkWood"),
                     },
                 },
-                new PieceSpec { Id = "pillar", Name = "Pillar", Footprint = pillar, Support = SupportRule.Stack, Boards = 1, Boxes = new[] { Solid(pillar, "DarkWood") } },
+                new PieceSpec { Id = "pillar", Name = "Pillar", Footprint = pillar, Support = SupportRule.Stack, Boards = 1, Size = PieceSize.Small, Boxes = new[] { Solid(pillar, "DarkWood") } },
+                new PieceSpec
+                {
+                    // A post in one 0.5 m cell that grows a short board toward each fence meeting it:
+                    // one piece makes L corners, T junctions and crossings, whichever way it's turned.
+                    Id = "fence_corner", Name = "Fence Corner", Footprint = new Vector3Int(1, 3, 1), Support = SupportRule.Ground, Boards = 1,
+                    Size = PieceSize.Small, ConnectGroup = "fence", Hint = "Joins fences meeting it on any side: corners, T's and crossings.",
+                    Boxes = new[] { new Box(new Vector3(0f, 0.775f, 0f), new Vector3(0.14f, 1.55f, 0.14f), "DarkWood") },
+                    Joins = new[]
+                    {
+                        new Box(new Vector3(0.16f, 0.75f, 0f), new Vector3(0.18f, 1.2f, 0.06f), "LightWood"),
+                        new Box(new Vector3(-0.16f, 0.75f, 0f), new Vector3(0.18f, 1.2f, 0.06f), "LightWood"),
+                        new Box(new Vector3(0f, 0.75f, 0.16f), new Vector3(0.06f, 1.2f, 0.18f), "LightWood"),
+                        new Box(new Vector3(0f, 0.75f, -0.16f), new Vector3(0.06f, 1.2f, 0.18f), "LightWood"),
+                    },
+                },
+                new PieceSpec
+                {
+                    // A lantern in one 0.5 m cell; it looks the same from every side, so it needs no facing.
+                    Id = "wall_light", Name = "Wall Light", Footprint = halfBlock, Support = SupportRule.SideAttach, Boards = 1,
+                    Size = PieceSize.Small, Use = PieceUse.Toggle, Bulb = new Vector3(0f, 0.25f, 0f),
+                    Boxes = new[]
+                    {
+                        new Box(new Vector3(0f, 0.1f, 0f), new Vector3(0.24f, 0.04f, 0.24f), "DarkWood"),
+                        new Box(new Vector3(0f, 0.4f, 0f), new Vector3(0.24f, 0.04f, 0.24f), "DarkWood"),
+                        new Box(new Vector3(-0.1f, 0.25f, -0.1f), new Vector3(0.03f, 0.26f, 0.03f), "DarkWood"),
+                        new Box(new Vector3(0.1f, 0.25f, -0.1f), new Vector3(0.03f, 0.26f, 0.03f), "DarkWood"),
+                        new Box(new Vector3(-0.1f, 0.25f, 0.1f), new Vector3(0.03f, 0.26f, 0.03f), "DarkWood"),
+                        new Box(new Vector3(0.1f, 0.25f, 0.1f), new Vector3(0.03f, 0.26f, 0.03f), "DarkWood"),
+                    },
+                },
+                new PieceSpec
+                {
+                    // 1 m wide, 3 m tall: reaches a deck or a roof two walls up.
+                    Id = "ladder", Name = "Ladder", Footprint = new Vector3Int(2, 6, 1), Support = SupportRule.Stack, Boards = 3,
+                    Climb = true, Hint = "Grip a rung to climb. Let go at the top to climb over.",
+                    Boxes = LadderBoxes(),
+                },
+                new PieceSpec
+                {
+                    Id = "climbing_wall", Name = "Climbing Wall", Footprint = wall, Support = SupportRule.Stack, Boards = 4, Size = PieceSize.Large,
+                    Climb = true, Hint = "Grip anywhere on it to climb. Let go at the top to climb over.",
+                    Boxes = ClimbingWallBoxes(),
+                },
             };
+        }
+
+        /// <summary>Two rails and nine rungs, 0.3 m apart.</summary>
+        private static Box[] LadderBoxes()
+        {
+            var boxes = new List<Box>
+            {
+                new Box(new Vector3(-0.42f, 1.5f, 0f), new Vector3(0.07f, 3f, 0.07f), "DarkWood"),
+                new Box(new Vector3(0.42f, 1.5f, 0f), new Vector3(0.07f, 3f, 0.07f), "DarkWood"),
+            };
+            for (int i = 1; i <= 9; i++) boxes.Add(new Box(new Vector3(0f, i * 0.3f, 0f), new Vector3(0.84f, 0.045f, 0.045f), "LightWood"));
+            return boxes.ToArray();
+        }
+
+        /// <summary>A board panel with staggered holds on both faces.</summary>
+        private static Box[] ClimbingWallBoxes()
+        {
+            var boxes = new List<Box> { new Box(new Vector3(0f, 1f, 0f), new Vector3(1f, 2f, 0.12f), "LightWood") };
+            var holds = new[] { new Vector2(-0.3f, 0.35f), new Vector2(0.25f, 0.6f), new Vector2(-0.15f, 0.9f), new Vector2(0.3f, 1.15f), new Vector2(-0.3f, 1.4f), new Vector2(0.1f, 1.65f), new Vector2(-0.1f, 1.9f) };
+            foreach (var h in holds)
+            {
+                boxes.Add(new Box(new Vector3(h.x, h.y, 0.09f), new Vector3(0.1f, 0.06f, 0.06f), "Rock"));
+                boxes.Add(new Box(new Vector3(-h.x, h.y, -0.09f), new Vector3(0.1f, 0.06f, 0.06f), "Rock"));
+            }
+            return boxes.ToArray();
         }
 
         [MenuItem("Campfire Friends/Building/Rebuild Build Kit")]
@@ -132,6 +240,8 @@ namespace CampfireFriends.Construction.Editor
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
 
             BuildAssets();
+            CampfireFriends.Shifts.Editor.ShiftKitBuilder.BuildAssets();
+            CampfireFriends.Ambience.Editor.AmbienceKitBuilder.BuildAssets();
             PrepareSandbox();
             UpgradeLobby();
             if (!Application.isBatchMode) EditorSceneManager.OpenScene(SandboxScenePath, OpenSceneMode.Single);
@@ -179,13 +289,19 @@ namespace CampfireFriends.Construction.Editor
             EditorUtility.SetDirty(catalog);
 
             BuildProxy(catalog);
-            var rigBase = BuildRigBase(materials);
+            var sounds = BuildSounds();
+            var rigBase = BuildRigBase(materials, sounds);
             BuildRigVariant(rigBase, "BuildRig_Desktop", typeof(KeyboardMouseBuildInput), typeof(ScreenPointerAim));
-            BuildRigVariant(rigBase, "BuildRig_Quest", typeof(RayInteractorBuildInput), typeof(RayInteractorAim));
+            BuildRigVariant(rigBase, "BuildRig_Quest", typeof(RayInteractorBuildInput), typeof(RayInteractorAim), typeof(OvrInputModality));
             BuildPaletteMenuPrefab(catalog);
             BuildModifyMenuPrefab();
+            BuildSessionMenuPrefab();
+            BuildAvatarPrefab(materials);
 
             AssetDatabase.SaveAssets();
+
+            // Fusion only spawns prefabs in its prefab table; a prefab made in this run isn't in it yet.
+            Fusion.Editor.NetworkProjectConfigUtilities.RebuildPrefabTable();
             return catalog;
         }
 
@@ -215,6 +331,8 @@ namespace CampfireFriends.Construction.Editor
                 var menu = root.GetComponent<BuildPaletteMenu>();
                 if (menu == null) menu = root.AddComponent<BuildPaletteMenu>();
 
+                AddMissingSlots(root, catalog.Count);
+
                 var so = new SerializedObject(menu);
                 so.FindProperty("_catalog").objectReferenceValue = catalog;
                 var slots = so.FindProperty("_slots");
@@ -222,6 +340,9 @@ namespace CampfireFriends.Construction.Editor
                 slots.arraySize = buttons.Length;
                 for (int i = 0; i < buttons.Length; i++) slots.GetArrayElementAtIndex(i).objectReferenceValue = buttons[i];
                 so.ApplyModifiedPropertiesWithoutUndo();
+
+                // The palette writes each piece's tooltip text from the catalog at runtime.
+                AddTooltips(buttons, null);
 
                 PrefabUtility.SaveAsPrefabAsset(root, MenuPrefabPath);
                 if (buttons.Length < catalog.Count)
@@ -231,6 +352,43 @@ namespace CampfireFriends.Construction.Editor
             {
                 PrefabUtility.UnloadPrefabContents(root);
             }
+        }
+
+        /// <summary>
+        /// When the catalog outgrows the authored menu, adds buttons like the last one to its grid
+        /// and makes the panel taller by the rows added, so every piece can be picked.
+        /// </summary>
+        private static void AddMissingSlots(GameObject root, int pieceCount)
+        {
+            var buttons = root.GetComponentsInChildren<UnityEngine.UI.Button>(true);
+            if (buttons.Length == 0 || buttons.Length >= pieceCount) return;
+
+            // A plain copy of the last button keeps every hand-made adjustment to it and its children.
+            var last = buttons[buttons.Length - 1].gameObject;
+            var parent = last.transform.parent;
+
+            for (int i = buttons.Length; i < pieceCount; i++)
+            {
+                var copy = Object.Instantiate(last, parent);
+                copy.name = $"{last.name} {i + 1}";
+            }
+
+            var grid = parent.GetComponent<UnityEngine.UI.GridLayoutGroup>();
+            if (grid == null || grid.constraint != UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount) return;
+
+            int columns = Mathf.Max(1, grid.constraintCount);
+            int addedRows = (pieceCount + columns - 1) / columns - (buttons.Length + columns - 1) / columns;
+            float extra = addedRows * (grid.cellSize.y + grid.spacing.y);
+            if (extra <= 0f) return;
+
+            // Grow the grid's panel and every fixed-height ancestor up to and including its canvas.
+            var canvas = parent.GetComponentInParent<Canvas>(true);
+            for (var rect = parent as RectTransform; rect != null; rect = rect.parent as RectTransform)
+            {
+                if (Mathf.Approximately(rect.anchorMin.y, rect.anchorMax.y)) rect.sizeDelta += new Vector2(0f, extra);
+                if (canvas != null && rect == canvas.transform) break;
+            }
+            Debug.Log($"[BuildKit] {MenuPrefabPath}: added {pieceCount - buttons.Length} button(s) for new pieces and {addedRows} row(s) of height.");
         }
 
         /// <summary>
@@ -244,7 +402,8 @@ namespace CampfireFriends.Construction.Editor
             foreach (var menu in FindInScene<BuildPaletteMenu>(scene))
             {
                 var panel = menu.transform.childCount > 0 ? menu.transform.GetChild(0).gameObject : null;
-                Assign(menu, ("_controller", controller), ("_panel", panel), ("_viewer", eyes));
+                Assign(menu, ("_controller", controller), ("_panel", panel), ("_placement.Viewer", eyes),
+                    ("_placement.Modality", controller.GetComponent<InputModalitySource>()));
             }
         }
 
@@ -276,6 +435,7 @@ namespace CampfireFriends.Construction.Editor
                     ("_delete", buttons[2]),
                     ("_close", buttons[3]),
                     ("_panel", root.transform.GetChild(0).gameObject));
+                AddTooltips(buttons.Take(ModifyActions.Length).ToArray(), i => (ModifyActions[i], ModifyHints[i]));
                 PrefabUtility.SaveAsPrefabAsset(root, ModifyMenuPrefabPath);
             }
             finally
@@ -341,6 +501,49 @@ namespace CampfireFriends.Construction.Editor
             Assign(menu, ("_controller", controller), ("_viewer", FindEyes(scene)));
         }
 
+        /// <summary>
+        /// Gives a menu one Interaction SDK tooltip, saved hidden on the buttons' canvas, and a
+        /// <see cref="ButtonTooltip"/> on every button pointing at it. <paramref name="text"/> fills
+        /// in a button's text only while it is still empty, so text edited by hand is kept.
+        /// </summary>
+        private static void AddTooltips(UnityEngine.UI.Button[] buttons, Func<int, (string title, string detail)> text)
+        {
+            if (buttons.Length == 0) return;
+
+            var canvas = buttons[0].GetComponentInParent<Canvas>(true);
+            if (canvas == null) return;
+
+            var view = canvas.GetComponentInChildren<TooltipView>(true);
+            if (view == null)
+            {
+                var instance = (GameObject)PrefabUtility.InstantiatePrefab(LoadByGuid<GameObject>(UiTooltipGuid), canvas.transform);
+                instance.name = "Tooltip";
+
+                // The sample icon is a placeholder; the title and detail say enough.
+                var icon = FindDeep(instance.transform, "Icon");
+                if (icon != null) icon.gameObject.SetActive(false);
+
+                view = instance.AddComponent<TooltipView>();
+                instance.SetActive(false);
+            }
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                var tooltip = buttons[i].GetComponent<ButtonTooltip>();
+                if (tooltip == null) tooltip = buttons[i].gameObject.AddComponent<ButtonTooltip>();
+
+                var so = new SerializedObject(tooltip);
+                so.FindProperty("_view").objectReferenceValue = view;
+                if (text != null && string.IsNullOrEmpty(so.FindProperty("_title").stringValue))
+                {
+                    var (title, detail) = text(i);
+                    so.FindProperty("_title").stringValue = title;
+                    so.FindProperty("_detail").stringValue = detail;
+                }
+                so.ApplyModifiedPropertiesWithoutUndo();
+            }
+        }
+
         private static T LoadByGuid<T>(string guid) where T : Object
         {
             return AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid))
@@ -395,6 +598,8 @@ namespace CampfireFriends.Construction.Editor
                 ["LineValid"] = Unlit("Line_Valid", new Color(0.3f, 1f, 0.45f)),
                 ["LineInvalid"] = Unlit("Line_Invalid", new Color(1f, 0.25f, 0.2f)),
                 ["Pointer"] = Unlit("Line_Pointer", new Color(0.95f, 0.95f, 0.8f)),
+                ["BulbOn"] = Unlit("Bulb_On", new Color(1f, 0.86f, 0.55f)),
+                ["BulbOff"] = Lit("Bulb_Off", new Color(0.45f, 0.43f, 0.38f)),
             };
         }
 
@@ -495,17 +700,128 @@ namespace CampfireFriends.Construction.Editor
 
                 var visual = instance.transform.Find("Visual");
                 for (int i = 0; i < spec.Boxes.Length; i++)
-                {
-                    var box = spec.Boxes[i];
-                    var mesh = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    mesh.name = spec.Boxes.Length == 1 ? "Mesh" : $"Mesh {i + 1}";
-                    Object.DestroyImmediate(mesh.GetComponent<Collider>());
-                    mesh.transform.SetParent(visual, false);
-                    mesh.transform.localPosition = box.Centre;
-                    mesh.transform.localScale = box.Size;
-                    mesh.GetComponent<MeshRenderer>().sharedMaterial = materials[box.Material];
-                }
+                    CreateBox(visual, spec.Boxes[i], spec.Boxes.Length == 1 ? "Mesh" : $"Mesh {i + 1}", materials);
+
+                if (spec.Bulb.HasValue) AddLight(instance, visual, spec.Bulb.Value, materials);
+                if (spec.Joins != null) AddJoins(instance, visual, spec.Joins, materials);
+                if (spec.Climb) instance.AddComponent<CampfireFriends.Climbing.Climbable>();
             });
+        }
+
+        private static GameObject CreateBox(Transform parent, Box box, string name, Dictionary<string, Material> materials)
+        {
+            var mesh = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            mesh.name = name;
+            Object.DestroyImmediate(mesh.GetComponent<Collider>());
+            mesh.transform.SetParent(parent, false);
+            mesh.transform.localPosition = box.Centre;
+            mesh.transform.localScale = box.Size;
+            mesh.GetComponent<MeshRenderer>().sharedMaterial = materials[box.Material];
+            return mesh;
+        }
+
+        /// <summary>One hidden part per side, shown by a <see cref="PieceConnectionView"/> where a neighbour joins.</summary>
+        private static void AddJoins(GameObject instance, Transform visual, Box[] joins, Dictionary<string, Material> materials)
+        {
+            string[] sides = { "+X", "-X", "+Z", "-Z" };
+            var parts = new GameObject[sides.Length];
+            for (int i = 0; i < sides.Length; i++)
+            {
+                parts[i] = CreateBox(visual, joins[i], $"Join {sides[i]}", materials);
+                parts[i].SetActive(false);
+            }
+
+            var view = instance.AddComponent<PieceConnectionView>();
+            Assign(view, ("_piece", instance.GetComponent<PieceView>()),
+                ("_posX", parts[0]), ("_negX", parts[1]), ("_posZ", parts[2]), ("_negZ", parts[3]));
+        }
+
+        /// <summary>
+        /// A bulb and a point light, switched by a <see cref="LightStateView"/>. Saved off, so the
+        /// placement ghost and a freshly placed light don't light anything until used.
+        /// </summary>
+        private static void AddLight(GameObject instance, Transform visual, Vector3 position, Dictionary<string, Material> materials)
+        {
+            var bulb = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            bulb.name = "Bulb";
+            Object.DestroyImmediate(bulb.GetComponent<Collider>());
+            bulb.transform.SetParent(visual, false);
+            bulb.transform.localPosition = position;
+            bulb.transform.localScale = Vector3.one * 0.15f;
+            var renderer = bulb.GetComponent<MeshRenderer>();
+            renderer.sharedMaterial = materials["BulbOff"];
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+
+            var lightObject = new GameObject("Light", typeof(Light));
+            lightObject.transform.SetParent(instance.transform, false);
+            lightObject.transform.localPosition = position;
+            var light = lightObject.GetComponent<Light>();
+            light.type = LightType.Point;
+            light.color = new Color(1f, 0.8f, 0.55f);
+            light.range = 5f;
+            light.intensity = 2f;
+            light.shadows = LightShadows.None;
+            light.enabled = false;
+
+            Assign(instance.AddComponent<LightStateView>(),
+                ("_light", light), ("_bulb", renderer), ("_bulbOn", materials["BulbOn"]), ("_bulbOff", materials["BulbOff"]));
+        }
+
+        // ---------------------------------------------------------------- sounds
+
+        /// <summary>
+        /// Fills the sound set from the clips in <see cref="SoundsFolder"/>, by file name:
+        /// sfx_build_{action}[_{small|medium|large|all}]_{nn}. Rotate and move clips both mean "moved".
+        /// Every rebuild rescans, so new variations only need dropping in.
+        /// </summary>
+        private static BuildSoundSet BuildSounds()
+        {
+            EnsureFolder(Path.GetDirectoryName(SoundSetPath).Replace('\\', '/'));
+            var set = LoadOrCreate<BuildSoundSet>(SoundSetPath);
+
+            var found = new Dictionary<string, List<AudioClip>>();
+            if (AssetDatabase.IsValidFolder(SoundsFolder))
+            {
+                foreach (var guid in AssetDatabase.FindAssets("t:AudioClip", new[] { SoundsFolder }))
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(guid);
+                    var match = SoundName.Match(Path.GetFileNameWithoutExtension(path).ToLowerInvariant());
+                    if (!match.Success)
+                    {
+                        Debug.LogWarning($"[BuildKit] {path} doesn't follow sfx_build_<action>[_<size>]_<nn>; skipped.");
+                        continue;
+                    }
+
+                    string action = match.Groups["action"].Value == "rotate" ? "move" : match.Groups["action"].Value;
+                    string key = match.Groups["size"].Success ? $"{action}_{match.Groups["size"].Value}" : action;
+                    if (!found.TryGetValue(key, out var clips)) found[key] = clips = new List<AudioClip>();
+                    clips.Add(AssetDatabase.LoadAssetAtPath<AudioClip>(path));
+                }
+            }
+
+            AudioClip[] Clips(string key) => found.TryGetValue(key, out var clips) ? clips.OrderBy(c => c.name).ToArray() : new AudioClip[0];
+
+            SizedClips Sized(string action) => new SizedClips
+            {
+                All = Clips(action).Concat(Clips($"{action}_all")).ToArray(),
+                Small = Clips($"{action}_small"),
+                Medium = Clips($"{action}_medium"),
+                Large = Clips($"{action}_large"),
+            };
+
+            set.Place = Sized("place");
+            set.Remove = Sized("remove");
+            set.Move = Sized("move");
+            set.Use = Sized("use");
+            set.Refused = Clips("refused");
+            set.Select = Clips("select");
+            set.MenuPick = Clips("menu_pick");
+            set.ModeOn = Clips("mode_on");
+            set.ModeOff = Clips("mode_off");
+            EditorUtility.SetDirty(set);
+
+            Debug.Log($"[BuildKit] Sounds: {found.Sum(pair => pair.Value.Count)} clips from {SoundsFolder} ({string.Join(", ", found.Keys.OrderBy(k => k))}).");
+            return set;
         }
 
         private static PieceDefinition BuildDefinition(PieceSpec spec, GameObject prefab)
@@ -518,6 +834,10 @@ namespace CampfireFriends.Construction.Editor
             definition.Cost = new List<ResourceAmount> { new ResourceAmount(ResourceType.Boards, spec.Boards) };
             definition.Removable = true;
             definition.RefundOnRemove = true;
+            definition.Size = spec.Size;
+            definition.Use = spec.Use;
+            definition.ConnectGroup = spec.ConnectGroup;
+            definition.Hint = spec.Hint;
             definition.Prefab = prefab;
             EditorUtility.SetDirty(definition);
             return definition;
@@ -542,10 +862,11 @@ namespace CampfireFriends.Construction.Editor
         // ---------------------------------------------------------------- rig
 
         /// <summary>
-        /// BuildRig_Base: root (BuildController) ▸ Preview (BuildPreviewView ▸ FootprintOutline) ▸ Pointer.
-        /// Variants add the device-specific input and aim components.
+        /// BuildRig_Base: root (BuildController) ▸ Preview (BuildPreviewView ▸ FootprintOutline) ▸
+        /// Pointer ▸ HoverOutline ▸ SelectionOutline ▸ Cues (BuildCueSounds, 2D) ▸ PieceSounds
+        /// (PieceSoundView ▸ Voice, 3D). Variants add the device-specific input and aim components.
         /// </summary>
-        private static GameObject BuildRigBase(Dictionary<string, Material> materials)
+        private static GameObject BuildRigBase(Dictionary<string, Material> materials, BuildSoundSet sounds)
         {
             var root = new GameObject("BuildRig_Base");
             try
@@ -577,6 +898,28 @@ namespace CampfireFriends.Construction.Editor
                     ("_hoverOutline", hover),
                     ("_selectionOutline", selection));
 
+                // Local cues: flat, so they read as feedback rather than as something in the world.
+                var cues = new GameObject("Cues", typeof(AudioSource), typeof(BuildCueSounds));
+                cues.transform.SetParent(root.transform, false);
+                var cueSource = cues.GetComponent<AudioSource>();
+                cueSource.playOnAwake = false;
+                cueSource.spatialBlend = 0f;
+                Assign(cues.GetComponent<BuildCueSounds>(), ("_controller", controller), ("_sounds", sounds), ("_source", cueSource));
+
+                // Piece sounds: positioned one-shots, a few metres of falloff around the camp.
+                var pieceSounds = new GameObject("PieceSounds", typeof(PieceSoundView));
+                pieceSounds.transform.SetParent(root.transform, false);
+                var voice = new GameObject("Voice", typeof(AudioSource));
+                voice.transform.SetParent(pieceSounds.transform, false);
+                var voiceSource = voice.GetComponent<AudioSource>();
+                voiceSource.playOnAwake = false;
+                voiceSource.spatialBlend = 1f;
+                voiceSource.rolloffMode = AudioRolloffMode.Logarithmic;
+                voiceSource.minDistance = 1.5f;
+                voiceSource.maxDistance = 30f;
+                voiceSource.dopplerLevel = 0f;
+                Assign(pieceSounds.GetComponent<PieceSoundView>(), ("_sounds", sounds), ("_voiceTemplate", voiceSource));
+
                 return PrefabUtility.SaveAsPrefabAsset(root, $"{RigPrefabs}/BuildRig_Base.prefab");
             }
             finally
@@ -596,13 +939,14 @@ namespace CampfireFriends.Construction.Editor
             return view;
         }
 
-        private static void BuildRigVariant(GameObject rigBase, string name, Type inputType, Type aimType)
+        private static void BuildRigVariant(GameObject rigBase, string name, Type inputType, Type aimType, params Type[] extras)
         {
             SaveVariant(rigBase, $"{RigPrefabs}/{name}.prefab", instance =>
             {
                 instance.name = name;
                 var input = instance.AddComponent(inputType);
                 var aim = instance.AddComponent(aimType);
+                foreach (var extra in extras) instance.AddComponent(extra);
                 Assign(instance.GetComponent<BuildController>(), ("_input", input), ("_aim", aim));
             });
         }
@@ -639,7 +983,20 @@ namespace CampfireFriends.Construction.Editor
             if (stock.arraySize == 0) SetStock(stock, 500);
             so.ApplyModifiedPropertiesWithoutUndo();
 
-            WireRayRig(scene);
+            if (WireRayRig(scene))
+            {
+                WireSession(scene, catalog, backend);
+                ControllerHandsSetup.Apply(scene);
+                if (CampfireFriends.Climbing.Editor.ClimbingSetup.Apply(scene))
+                    CampfireFriends.Climbing.Editor.ClimbingSetup.AddTestClimbs(scene,
+                        AssetDatabase.LoadAssetAtPath<GameObject>($"{PiecePrefabs}/Piece_Ladder.prefab"),
+                        AssetDatabase.LoadAssetAtPath<GameObject>($"{PiecePrefabs}/Piece_ClimbingWall.prefab"),
+                        AssetDatabase.LoadAssetAtPath<Material>($"{Materials}/Sandbox_Rock.mat"));
+                CampfireFriends.Locomotion.Editor.SlideSetup.Apply(scene);
+            }
+            CampfireFriends.Shifts.Editor.ShiftKitBuilder.WireScene(scene);
+            CampfireFriends.Ambience.Editor.AmbienceKitBuilder.WireScene(scene);
+            EnsureInBuildSettings(SandboxScenePath);
             EditorSceneManager.SaveScene(scene);
         }
 
@@ -703,6 +1060,7 @@ namespace CampfireFriends.Construction.Editor
             Assign(rig.GetComponent<RayInteractorAim>(), ("_rayInteractor", ray));
             Assign(rig.GetComponent<RayInteractorBuildInput>(),
                 ("_confirmSelector", selector),
+                ("_ray", ray),
                 ("_mainHand", rayController != null ? rayController : (Object)right));
 
             EnsurePointableEventSystem(scene);
@@ -776,6 +1134,244 @@ namespace CampfireFriends.Construction.Editor
 
             WireRayRig(scene);
             EditorSceneManager.SaveScene(scene);
+        }
+
+        // ---------------------------------------------------------------- networked play
+
+        /// <summary>
+        /// The session menu: a status line over Host, Join, Leave and Close. Generated once from the
+        /// Interaction SDK UI set, like the modify menu; later rebuilds only re-link it.
+        /// </summary>
+        private static void BuildSessionMenuPrefab()
+        {
+            if (!File.Exists(SessionMenuPrefabPath)) CreateSessionMenuPrefab();
+
+            var root = PrefabUtility.LoadPrefabContents(SessionMenuPrefabPath);
+            try
+            {
+                var menu = root.GetComponent<SessionMenu>();
+                if (menu == null) menu = root.AddComponent<SessionMenu>();
+
+                var buttons = root.GetComponentsInChildren<UnityEngine.UI.Button>(true);
+                if (buttons.Length < SessionActions.Length)
+                    throw new InvalidOperationException($"{SessionMenuPrefabPath} needs {SessionActions.Length} buttons: {string.Join(", ", SessionActions)}.");
+
+                UnityEngine.UI.Button Named(string action) => buttons.FirstOrDefault(b => b.name == $"Button {action}");
+
+                // Game mode buttons sit under the status line, above Host and Join, in order.
+                var host = Named("Host") ?? throw new InvalidOperationException($"{SessionMenuPrefabPath} has no 'Button Host'.");
+                foreach (var mode in SessionModes) AddSessionButton(root, host, mode, host.transform.GetSiblingIndex());
+                buttons = root.GetComponentsInChildren<UnityEngine.UI.Button>(true);
+                Assign(menu,
+                    ("_creative", Named(SessionModes[0])),
+                    ("_survival", Named(SessionModes[1])),
+                    ("_host", Named("Host")),
+                    ("_join", Named("Join")),
+                    ("_leave", Named("Leave")),
+                    ("_close", Named("Close")),
+                    ("_status", root.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t => t.name == "Status")),
+                    ("_panel", root.transform.GetChild(0).gameObject));
+                PrefabUtility.SaveAsPrefabAsset(root, SessionMenuPrefabPath);
+            }
+            finally
+            {
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+        }
+
+        /// <summary>
+        /// Adds a button copied from <paramref name="template"/> at <paramref name="siblingIndex"/>,
+        /// unless one with that name is there already, and makes the panel one button taller.
+        /// </summary>
+        private static void AddSessionButton(GameObject root, UnityEngine.UI.Button template, string action, int siblingIndex)
+        {
+            var parent = template.transform.parent;
+            if (parent.Find($"Button {action}") != null) return;
+
+            var copy = Object.Instantiate(template.gameObject, parent);
+            copy.name = $"Button {action}";
+            copy.transform.SetSiblingIndex(siblingIndex);
+            var label = copy.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t => t.name == "Label");
+            if (label != null) label.text = action;
+
+            float grow = ((RectTransform)template.transform).sizeDelta.y + 8f;
+            foreach (var name in new[] { "CanvasRoot", "UIBackplate" })
+            {
+                var rect = (RectTransform)FindDeep(root.transform, name);
+                if (rect != null) rect.sizeDelta += new Vector2(0f, grow);
+            }
+        }
+
+        private static void CreateSessionMenuPrefab()
+        {
+            var backplate = LoadByGuid<GameObject>(UiBackplateGuid);
+            var button = LoadByGuid<GameObject>(UiButtonGuid);
+
+            const float width = 320f, buttonHeight = 48f, statusHeight = 64f, spacing = 8f, padding = 24f;
+            var size = new Vector2(width + padding * 2f,
+                statusHeight + SessionActions.Length * (buttonHeight + spacing) + padding * 2f);
+
+            var root = new GameObject(Path.GetFileNameWithoutExtension(SessionMenuPrefabPath));
+            try
+            {
+                var panel = (GameObject)PrefabUtility.InstantiatePrefab(backplate, root.transform);
+                panel.name = "Panel";
+
+                var canvas = (RectTransform)FindDeep(panel.transform, "CanvasRoot");
+                var plate = (RectTransform)FindDeep(panel.transform, "UIBackplate");
+                canvas.sizeDelta = size;
+                canvas.localScale = Vector3.one * 0.0016f;
+                plate.sizeDelta = size;
+
+                TMP_Text labelStyle = null;
+                foreach (var action in SessionActions)
+                {
+                    var instance = (GameObject)PrefabUtility.InstantiatePrefab(button, plate);
+                    instance.name = $"Button {action}";
+                    ((RectTransform)instance.transform).sizeDelta = new Vector2(width, buttonHeight);
+
+                    var label = instance.GetComponentsInChildren<TMP_Text>(true).FirstOrDefault(t => t.name == "Label");
+                    if (label != null) label.text = action;
+                    if (labelStyle == null) labelStyle = label;
+
+                    var icon = FindDeep(instance.transform, "Icon");
+                    if (icon != null) icon.gameObject.SetActive(false);
+                }
+
+                // The status line sits above the buttons, in the same font as their labels.
+                var statusObject = new GameObject("Status", typeof(RectTransform));
+                statusObject.transform.SetParent(plate, false);
+                statusObject.transform.SetAsFirstSibling();
+                ((RectTransform)statusObject.transform).sizeDelta = new Vector2(width, statusHeight);
+                var status = statusObject.AddComponent<TextMeshProUGUI>();
+                if (labelStyle != null) status.font = labelStyle.font;
+                status.fontSize = 20f;
+                status.color = Color.white;
+                status.alignment = TextAlignmentOptions.Center;
+                status.textWrappingMode = TextWrappingModes.Normal;
+                status.text = "Playing offline.";
+                var layout = statusObject.AddComponent<UnityEngine.UI.LayoutElement>();
+                layout.preferredHeight = statusHeight;
+                layout.preferredWidth = width;
+
+                PrefabUtility.SaveAsPrefabAsset(root, SessionMenuPrefabPath);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        /// <summary>
+        /// PlayerAvatar: NetworkObject + <see cref="PlayerAvatar"/> ▸ Head (with a visor, so you can
+        /// tell which way someone faces) and two hands. Tinted per player at runtime.
+        /// </summary>
+        private static void BuildAvatarPrefab(Dictionary<string, Material> materials)
+        {
+            EnsureFolder(NetworkPrefabs);
+            var root = new GameObject("PlayerAvatar", typeof(NetworkObject), typeof(PlayerAvatar));
+            try
+            {
+                var avatarMaterial = Lit("Avatar", Color.white);
+
+                var head = new GameObject("Head").transform;
+                head.SetParent(root.transform, false);
+                AvatarPart("Skull", PrimitiveType.Sphere, head, new Vector3(0f, 0f, -0.03f), new Vector3(0.18f, 0.22f, 0.2f), avatarMaterial);
+                AvatarPart("Visor", PrimitiveType.Cube, head, new Vector3(0f, 0.01f, 0.06f), new Vector3(0.16f, 0.06f, 0.06f), materials["DarkWood"]);
+
+                var left = AvatarPart("Left Hand", PrimitiveType.Cube, root.transform, Vector3.zero, new Vector3(0.07f, 0.03f, 0.11f), avatarMaterial);
+                var right = AvatarPart("Right Hand", PrimitiveType.Cube, root.transform, Vector3.zero, new Vector3(0.07f, 0.03f, 0.11f), avatarMaterial);
+
+                Assign(root.GetComponent<PlayerAvatar>(), ("_head", head), ("_leftHand", left), ("_rightHand", right));
+                PrefabUtility.SaveAsPrefabAsset(root, AvatarPath);
+            }
+            finally
+            {
+                Object.DestroyImmediate(root);
+            }
+        }
+
+        private static Transform AvatarPart(string name, PrimitiveType shape, Transform parent, Vector3 position, Vector3 scale, Material material)
+        {
+            var part = GameObject.CreatePrimitive(shape);
+            part.name = name;
+            Object.DestroyImmediate(part.GetComponent<Collider>());
+            part.transform.SetParent(parent, false);
+            part.transform.localPosition = position;
+            part.transform.localScale = scale;
+            var renderer = part.GetComponent<MeshRenderer>();
+            renderer.sharedMaterial = material;
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            return part.transform;
+        }
+
+        /// <summary>
+        /// Makes the sandbox shareable: a networked construction session beside the offline one, the
+        /// session that hosts or joins (and sends the player's head and hands), and its menu, opened
+        /// with the left menu button.
+        /// </summary>
+        private static void WireSession(Scene scene, PieceCatalog catalog, LocalConstructionBackend offline)
+        {
+            var authority = FindInScene<ConstructionAuthority>(scene).FirstOrDefault();
+            if (authority == null)
+            {
+                var go = new GameObject("Construction (network)", typeof(NetworkObject), typeof(ConstructionAuthority));
+                SceneManager.MoveGameObjectToScene(go, scene);
+                authority = go.GetComponent<ConstructionAuthority>();
+            }
+            var authoritySo = new SerializedObject(authority);
+            authoritySo.FindProperty("_catalog").objectReferenceValue = catalog;
+            authoritySo.FindProperty("_placedPiecePrefab").objectReferenceValue = AssetDatabase.LoadAssetAtPath<NetworkObject>(ProxyPath);
+            var stock = authoritySo.FindProperty("_startingStock");
+            if (stock.arraySize == 0) SetStock(stock, 500);
+            authoritySo.ApplyModifiedPropertiesWithoutUndo();
+
+            var session = FindInScene<NetworkSession>(scene).FirstOrDefault();
+            if (session == null)
+            {
+                var go = new GameObject("Network Session", typeof(NetworkSession), typeof(AvatarPoseSource), typeof(ControllerButtonEvent));
+                SceneManager.MoveGameObjectToScene(go, scene);
+                session = go.GetComponent<NetworkSession>();
+            }
+
+            var transforms = FindInScene<Transform>(scene);
+            Transform Named(string name) => transforms.FirstOrDefault(t => t.name == name);
+            Assign(session.GetComponent<AvatarPoseSource>(),
+                ("_head", FindEyes(scene)),
+                ("_leftHand", Named("LeftHandAnchor") ?? Named("LeftControllerAnchor")),
+                ("_rightHand", Named("RightHandAnchor") ?? Named("RightControllerAnchor")));
+            Assign(session,
+                ("_avatarPrefab", AssetDatabase.LoadAssetAtPath<NetworkObject>(AvatarPath)),
+                ("_poses", session.GetComponent<AvatarPoseSource>()),
+                ("_offlineBackend", offline));
+
+            var menu = FindInScene<SessionMenu>(scene).FirstOrDefault();
+            if (menu == null)
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(SessionMenuPrefabPath);
+                menu = ((GameObject)PrefabUtility.InstantiatePrefab(prefab, scene)).GetComponent<SessionMenu>();
+            }
+            Assign(menu, ("_session", session), ("_placement.Viewer", FindEyes(scene)),
+                ("_placement.Modality", FindInScene<InputModalitySource>(scene).FirstOrDefault()));
+
+            // Left menu button → toggle the session menu (replacing any earlier wiring).
+            var button = session.GetComponent<ControllerButtonEvent>();
+            for (int i = button.Pressed.GetPersistentEventCount() - 1; i >= 0; i--) UnityEventTools.RemovePersistentListener(button.Pressed, i);
+            UnityEventTools.AddVoidPersistentListener(button.Pressed, menu.Toggle);
+            EditorUtility.SetDirty(button);
+
+            EditorSceneManager.MarkSceneDirty(scene);
+        }
+
+        /// <summary>Fusion shares scenes by build index, so the scene must be in the build settings.</summary>
+        private static void EnsureInBuildSettings(string scenePath)
+        {
+            var scenes = EditorBuildSettings.scenes.ToList();
+            if (scenes.Any(s => s.path == scenePath)) return;
+
+            scenes.Add(new EditorBuildSettingsScene(scenePath, true));
+            EditorBuildSettings.scenes = scenes.ToArray();
+            Debug.Log($"[BuildKit] Added {scenePath} to the build settings.");
         }
 
         // ---------------------------------------------------------------- helpers

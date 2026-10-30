@@ -11,11 +11,16 @@ namespace CampfireFriends.Construction
     /// to locomotion.
     ///
     /// Defaults on the aiming hand: thumbstick click enters or leaves build mode, A rotates, B steps back.
+    /// A trigger pull that lands on a menu (or anything else the ray is interacting with) is the
+    /// menu's, never a confirm on the build behind it.
     /// </summary>
     public class RayInteractorBuildInput : BuildInputSource
     {
         [Tooltip("The ray interactor's selector, usually its TriggerSelector.")]
         [SerializeField, Interface(typeof(ISelector))] private Object _confirmSelector;
+
+        [Tooltip("The ray interactor that selector belongs to. Found from the selector when empty.")]
+        [SerializeField] private RayInteractor _ray;
 
         [Tooltip("The aiming hand's controller (the ray interactor's ControllerRef).")]
         [SerializeField, Interface(typeof(IController))] private Object _mainHand;
@@ -33,6 +38,7 @@ namespace CampfireFriends.Construction
         {
             _selector = _confirmSelector as ISelector;
             _controller = _mainHand as IController;
+            if (_ray == null && _confirmSelector is Component selector) _ray = selector.GetComponentInParent<RayInteractor>();
         }
 
         private void OnEnable()
@@ -46,7 +52,7 @@ namespace CampfireFriends.Construction
             _confirmPressed = false;
         }
 
-        private void OnSelected() => _confirmPressed = true;
+        private void OnSelected() => _confirmPressed = _ray == null || !_ray.HasInteractable;
 
         public override BuildInputFrame Poll()
         {

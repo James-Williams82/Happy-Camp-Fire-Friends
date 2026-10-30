@@ -13,7 +13,8 @@ namespace CampfireFriends.Construction
     /// Modes (see <see cref="BuildMode"/>): in build mode with nothing in hand the pointer outlines
     /// placed pieces and confirm selects one; a selected piece offers rotate, reposition and delete
     /// (<see cref="RotateSelected"/>, <see cref="RepositionSelected"/>, <see cref="DeleteSelected"/>),
-    /// which menus call. Placing needs a piece picked from the menu first.
+    /// which menus call. Placing needs a piece picked from the menu first. With build mode off,
+    /// the pointer outlines usable pieces within reach and confirm uses them (switches a light).
     ///
     /// Composed entirely from swappable parts: an input source, an aim source, and passive views.
     /// </summary>
@@ -25,7 +26,7 @@ namespace CampfireFriends.Construction
         [SerializeField] private BuildPreviewView _preview;
         [SerializeField] private PointerView _pointer;
 
-        [Tooltip("Outlines the placed piece under the pointer, showing what confirm would select.")]
+        [Tooltip("Outlines the placed piece under the pointer, showing what confirm would select or use.")]
         [SerializeField] private BoundsOutlineView _hoverOutline;
 
         [Tooltip("Outlines the selected piece while its modify menu is open or it is being moved.")]
@@ -64,6 +65,15 @@ namespace CampfireFriends.Construction
         /// <summary>Build mode was entered, left or changed. Menus follow this.</summary>
         public event Action<BuildMode> ModeChanged;
 
+        /// <summary>A palette piece was picked to place (its catalog index).</summary>
+        public event Action<int> PiecePicked;
+
+        /// <summary>A placed piece was selected and its modify menu opened (its placed id).</summary>
+        public event Action<int> PieceSelected;
+
+        /// <summary>A placed piece was used with build mode off (its placed id).</summary>
+        public event Action<int> PieceUsed;
+
         private void Awake() => _targeter = new BuildTargeter(_targeting);
 
         private void OnDisable()
@@ -89,7 +99,7 @@ namespace CampfireFriends.Construction
 
             if (!State.IsBuilding)
             {
-                HideViews();
+                UpdateUsing(input.Confirm);
                 return;
             }
 
@@ -124,8 +134,14 @@ namespace CampfireFriends.Construction
         /// <summary>Picks a palette piece and starts placing it.</summary>
         public void SelectPiece(int index)
         {
-            State.Select(index);
+            Pick(index);
             ReportMode();
+        }
+
+        private void Pick(int index)
+        {
+            State.Select(index);
+            if (State.Mode == BuildMode.Place && State.SelectedIndex == index) PiecePicked?.Invoke(index);
         }
 
         /// <summary>Turns the selected piece a quarter turn about Y, in place.</summary>
@@ -191,7 +207,7 @@ namespace CampfireFriends.Construction
             if (!State.IsBuilding) return;
 
             if (input.Back) State.Back();
-            if (input.Slot >= 0) State.Select(input.Slot);
+            if (input.Slot >= 0) Pick(input.Slot);
             if (input.Cycle != 0) State.Cycle(input.Cycle);
 
             if (input.Rotate)
@@ -210,8 +226,15 @@ namespace CampfireFriends.Construction
             ShowOutline(_hoverOutline, hovered != null ? hovered.PlacedId : BuildWorld.NoPiece, true);
 
             if (!confirm) return;
-            if (hovered != null) State.Inspect(hovered.PlacedId);
-            else if (target.Piece == null) State.Deselect();
+            if (hovered != null)
+            {
+                State.Inspect(hovered.PlacedId);
+                PieceSelected?.Invoke(hovered.PlacedId);
+            }
+            else if (target.Piece == null)
+            {
+                State.Deselect();
+            }
         }
 
         private void UpdatePlacing(BuildTarget target, bool confirm)
@@ -228,12 +251,13 @@ namespace CampfireFriends.Construction
 
             Proposal = _placementSolver.Solve(definition.Footprint, State.Rotation, target.Aim);
             Reason = Proposal.HasPose
-                ? _backend.Validator.ValidatePlacement(definition.Id, Proposal.Min, Proposal.Rotation, _backend.Stock)
+                ? _backend.Validator.ValidatePlacement(definition.Id, Proposal.Min, Proposal.Rotation, _backend.FreeBuilding ? null : _backend.Stock)
                 : PlacementRejection.NoTarget;
             ShowGhost(definition);
 
             if (!confirm || !Allowed(Reason, definition.Id)) return;
 
+            // The piece stays in hand so the next one can go straight down; Back returns to the menu.
             _backend.RequestPlace(definition.Id, Proposal.Min, Proposal.Rotation);
             Requested?.Invoke();
         }
@@ -259,6 +283,44 @@ namespace CampfireFriends.Construction
             Requested?.Invoke();
             State.Deselect();
             ReportMode();
+        }
+
+        /// <summary>Build mode off: outline the usable piece under the pointer if it's within reach; confirm uses it.</summary>
+        private void UpdateUsing(bool confirm)
+        {
+            HideGhost();
+            if (_selectionOutline != null) _selectionOutline.Hide();
+
+            int usable = BuildWorld.NoPiece;
+            if (_aim != null && _aim.TryGetRay(out var ray))
+            {
+                // The pointer stays out of build mode too, for aiming at things to use.
+                var target = _targeter.Target(ray);
+                if (_pointer != null) _pointer.Show(ray, target.PointerEnd);
+                if (target.Piece != null && CanUse(target.Piece.PlacedId, ray.origin)) usable = target.Piece.PlacedId;
+            }
+            else if (_pointer != null)
+            {
+                _pointer.Hide();
+            }
+            ShowOutline(_hoverOutline, usable, true);
+
+            if (!confirm || usable == BuildWorld.NoPiece) return;
+
+            _backend.RequestUse(usable);
+            Requested?.Invoke();
+            PieceUsed?.Invoke(usable);
+        }
+
+        /// <summary>Usable at all, and the hand is within the piece's use range of its nearest surface.</summary>
+        private bool CanUse(int placedId, Vector3 hand)
+        {
+            if (_backend.Validator.ValidateUse(placedId) != PlacementRejection.None) return false;
+
+            _backend.World.TryGet(placedId, out var piece);
+            _backend.Validator.TryGetDefinition(piece.PieceId, out var definition);
+            var bounds = _backend.Grid.ToWorldBounds(piece.Bounds);
+            return (bounds.ClosestPoint(hand) - hand).sqrMagnitude <= definition.UseRange * definition.UseRange;
         }
 
         // ---------------------------------------------------------------- helpers

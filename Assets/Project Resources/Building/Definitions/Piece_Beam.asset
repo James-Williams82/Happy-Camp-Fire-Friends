@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: beam
   DisplayName: Beam
+  Hint: 
   Footprint: {x: 3, y: 1, z: 1}
   Support: 3
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 0
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 5519803268271508756, guid: c69e9dbaffe77ad4d895f2c8cc9be86e, type: 3}

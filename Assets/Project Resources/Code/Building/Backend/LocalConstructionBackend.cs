@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CampfireFriends.Building;
+using CampfireFriends.Game;
 using CampfireFriends.Supplies;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace CampfireFriends.Construction
         public BuildWorld World { get; private set; }
         public PlacementValidator Validator { get; private set; }
         public IStockView Stock => _stock;
+        public bool FreeBuilding => GameModes.Rules.FreeBuilding;
 
         public event Action<PlacementRejection> RequestRejected;
 
@@ -58,12 +60,14 @@ namespace CampfireFriends.Construction
 
         public void RequestPlace(string pieceId, Vector3Int min, GridRotation rotation)
         {
+            _service.FreeBuilding = FreeBuilding;
             var result = _service.TryPlace(new PlacementRequest { PieceId = pieceId, Min = min, Rotation = rotation });
             if (!result.Success) RequestRejected?.Invoke(result.Rejection);
         }
 
         public void RequestRemove(int placedId)
         {
+            _service.FreeBuilding = FreeBuilding;
             var rejection = _service.TryRemove(placedId);
             if (rejection != PlacementRejection.None) RequestRejected?.Invoke(rejection);
         }
@@ -71,6 +75,12 @@ namespace CampfireFriends.Construction
         public void RequestMove(int placedId, Vector3Int min, GridRotation rotation)
         {
             var rejection = _service.TryMove(placedId, min, rotation);
+            if (rejection != PlacementRejection.None) RequestRejected?.Invoke(rejection);
+        }
+
+        public void RequestUse(int placedId)
+        {
+            var rejection = _service.TryUse(placedId);
             if (rejection != PlacementRejection.None) RequestRejected?.Invoke(rejection);
         }
     }

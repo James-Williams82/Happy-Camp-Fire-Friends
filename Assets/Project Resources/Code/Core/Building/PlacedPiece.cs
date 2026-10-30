@@ -15,8 +15,12 @@ namespace CampfireFriends.Building
         /// <summary>Changed only through the damage/repair service.</summary>
         public int Health { get; set; }
 
-        public PlacedPiece(int id, string pieceId, CellBounds bounds, GridRotation rotation, int placedBy, int health)
+        /// <summary>Whether a toggle piece (a light) is switched on. Changed only through <see cref="BuildWorld.SetOn"/>.</summary>
+        public bool On { get; internal set; }
+
+        public PlacedPiece(int id, string pieceId, CellBounds bounds, GridRotation rotation, int placedBy, int health, bool on = false)
         {
+            On = on;
             Id = id;
             PieceId = pieceId;
             Bounds = bounds;

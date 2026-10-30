@@ -70,6 +70,19 @@ namespace CampfireFriends.Building
             return ValidatePlacement(piece.PieceId, min, rotation, null, placedId);
         }
 
+        /// <summary>
+        /// Whether a placed piece can be used at all. Reach is the user's side of it: the authority
+        /// doesn't know where hands are, so the local tool checks <see cref="PieceDefinition.UseRange"/>.
+        /// </summary>
+        public PlacementRejection ValidateUse(int placedId)
+        {
+            if (!_world.TryGet(placedId, out var piece)) return PlacementRejection.UnknownPlacedPiece;
+            if (!_pieces.TryGet(piece.PieceId, out var definition)) return PlacementRejection.UnknownPiece;
+            if (definition.Use == PieceUse.None) return PlacementRejection.NotUsable;
+
+            return PlacementRejection.None;
+        }
+
         /// <summary>The first touching piece that would lose its support if <paramref name="piece"/> were removed.</summary>
         private int FindDependent(PlacedPiece piece)
         {

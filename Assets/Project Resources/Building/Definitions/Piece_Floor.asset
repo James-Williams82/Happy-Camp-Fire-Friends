@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: CampfireFriends.Core::CampfireFriends.Building.PieceDefinition
   Id: floor
   DisplayName: Floor
+  Hint: 
   Footprint: {x: 2, y: 1, z: 2}
   Support: 0
   Cost:
@@ -22,4 +23,8 @@ MonoBehaviour:
   Removable: 1
   RefundOnRemove: 1
   MaxHealth: 100
+  Size: 1
+  Use: 0
+  UseRange: 2.5
+  ConnectGroup: 
   Prefab: {fileID: 2840459298862953178, guid: e216a6b3a170d4e4480d5993c236ecc0, type: 3}
